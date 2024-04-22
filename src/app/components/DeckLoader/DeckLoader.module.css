@@ -1,0 +1,26 @@
+.container {
+    margin: auto;
+    width: 80%;
+}
+
+.deckloadForm {
+    margin: auto;
+    min-width: 450px;
+    width: 450px;
+    text-align: center;
+}
+
+.btnContainer {
+    margin-top: 8px;
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+}
+
+.helpBtn {
+    height: 30px;
+    width: 30px;
+    vertical-align: middle;
+    margin: auto 0px;
+    padding: 0px;
+}

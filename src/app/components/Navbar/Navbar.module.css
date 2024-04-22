@@ -1,0 +1,22 @@
+.container {
+  display: flex;
+  justify-content: right;
+  width: 98%;
+  margin: 0px auto;
+  margin-bottom: 8px;
+}
+
+.container h1 {
+  flex-basis: 90%;
+}
+
+.betaTxt {
+  position: relative;
+  font-size: 16px;
+  left: -110px;
+  top: 20px;
+}
+
+.link {
+  margin: auto 16px;
+}
