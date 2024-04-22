@@ -3,8 +3,14 @@ import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import styles from "./DeckLoader.module.css";
 import DeckLoaderHelpModal from "../DeckLoaderHelpModal/DeckLoaderHelpModal";
-import getDeck from "@/app/api/Deck/getDeck";
-const DeckLoader = () => {
+import submitDeckList from "../../api/Deck/submitDeckList";
+import { CardType } from "../../interface/Card";
+
+type Props = {
+  setDeck: (deck: CardType[]) => void;
+};
+
+const DeckLoader = ({ setDeck }: Props) => {
   const { register, handleSubmit } = useForm<Data>();
   const [showHelpModal, setShowHelpModal] = useState(false);
 
@@ -19,8 +25,8 @@ const DeckLoader = () => {
   type Data = yup.InferType<typeof schema>;
 
   const onSubmit = async (data: Data) => {
-    const res = await getDeck(data.decklist);
-    alert(res);
+    const res = await submitDeckList(data.decklist);
+    setDeck(res);
   };
 
   return (

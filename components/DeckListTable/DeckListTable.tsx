@@ -26,7 +26,7 @@ export default async function DeckListTable() {
           return (
             <tr key={i.id} className={styles.tableItem}>
               <td>
-                <Link href={`/deck/${i.id}`} className={styles.rowLink}>{i.name}</Link>
+                <Link href={`/decks/${i.id}`} className={styles.rowLink}>{i.name}</Link>
               </td>
               <td>{i.leader}</td>
               <td>{i.author}</td>

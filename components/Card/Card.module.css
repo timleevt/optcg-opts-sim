@@ -1,0 +1,20 @@
+.container {
+    /* display: flex;
+    flex-direction: column; */
+    position: relative;
+}
+
+.numCopies {
+    position: relative;
+    top: -35px;
+    left: -10px;
+    /* color: white; */
+    border: 1px solid black;
+    background-color: white;
+    border-radius: 50%;
+    width: 15px;
+    height: 15px;
+    font-size: 12px;
+    text-align: center;
+    padding: 0px;
+}

@@ -1,4 +1,4 @@
-import DeckListTable from "../components/DeckListTable/DeckListTable"
+import DeckListTable from "../../../components/DeckListTable/DeckListTable"
 
 const Deck = () => {
   return (

@@ -1,20 +1,20 @@
 "use client";
 import { useState } from "react";
-import DeckLoader from "../components/DeckLoader/DeckLoader";
+import DeckLoader from "../../../components/DeckLoader/DeckLoader";
+import { CardType } from "../../../interface/Card";
+import DeckListContainer from "../../../components/DeckListContainer/DeckListContainer";
 
 const Build = () => {
-  const [deck, setDeck] = useState('');
+  const [deck, setDeck] = useState<CardType[] | null>(null);
 
   if (deck) {
     return (
-      <div>
-        <h1>Loaded deck here</h1>
-      </div>
+      <DeckListContainer deck={deck}/>
     );
   }
   return (
     <div>
-      <DeckLoader />
+      <DeckLoader setDeck={setDeck} />
     </div>
   );
 };

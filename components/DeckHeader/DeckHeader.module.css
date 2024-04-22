@@ -1,0 +1,16 @@
+.container {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.textArea {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.txtArea > h2 {
+  text-align: center;
+}
