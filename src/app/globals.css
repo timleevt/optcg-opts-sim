@@ -14,3 +14,7 @@ button {
   background-color: cadetblue;
   padding: 12px;
 }
+
+button:hover {
+  cursor: pointer;
+}

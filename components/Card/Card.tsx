@@ -61,7 +61,7 @@ Props) => {
           style={{ filter: "brightness(50%)" }}
         />
       )}
-      {cardType != "Leader" && (
+      {numCopies && cardType != "Leader" && (
         <span className={styles.numCopies}>
           {numCopies ? `${numCopies}x` : ""}
           <span></span>

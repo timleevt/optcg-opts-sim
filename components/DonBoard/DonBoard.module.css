@@ -1,17 +1,18 @@
 .container {
   display: flex;
-  justify-content: center;
   gap: 10px;
-  margin-bottom: 16px;
+  border: 1px solid black;
 }
 
-.textArea {
+.donBtnContainer {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
+  gap: 8px;
 }
 
-.txtArea > h2 {
+.donCardContainer {
+  margin-top: 12px;
   text-align: center;
+  min-height: 93px;
 }

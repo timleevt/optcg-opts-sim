@@ -1,6 +1,23 @@
 .container {
-    display: flex;
-    max-width: 80svw;
-    border: 3px solid black;
-    flex-wrap: wrap;
+  display: flex;
+  max-width: 40svw;
+  flex-wrap: wrap;
+  max-height: 100px;
+}
+
+@media (max-width: 920px) {
+  .container {
+    max-width: 90svw;
+    max-height: 300px;
+    overflow: scroll;
+    border: 1px solid black;
+    margin: auto;
+  }
+}
+
+@media (max-width: 410px) {
+  .container {
+    max-width: 95svw;
+    max-height: 200px;
+  }
 }
