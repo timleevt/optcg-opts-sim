@@ -1,0 +1,66 @@
+/* Modal.css */
+.modalBackground {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Dim background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 3;
+}
+
+.modalContent {
+  position: fixed;
+  background-color: white;
+  padding: 20px;
+  border-radius: 5px;
+  max-width: 40%;
+  max-height: 80svh;
+  height: 80svh;
+  overflow: scroll;
+}
+
+.close {
+  position: absolute;
+  top: 10px;
+  right: 25px;
+  cursor: pointer;
+}
+
+.curveBtnContainer {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+
+.curveBtnContainer > button {
+    border: none;
+    color: black;
+    background-color: white;
+    font-size: 22px;
+}
+
+.curveBtnContainer > button:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 986px) {
+  .modalContent {
+    max-width: 70%;
+  }
+}
+
+@media (max-width: 566px) {
+  .modalContent {
+    max-width: 90%;
+  }
+}
+
+@media (max-width: 450px) {
+  .curveBtnContainer {
+    flex-wrap: wrap;
+  }
+}

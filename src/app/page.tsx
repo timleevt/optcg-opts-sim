@@ -19,10 +19,8 @@ export default function Home() {
       <div>
         <h2 style={{textAlign: "center"}}>News & Updates</h2>
         <p className={styles.newsItem}>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam
-          quisquam, consequatur optio repellendus vero voluptate perspiciatis,
-          rem ratione sint adipisci quaerat! Commodi molestiae culpa molestias,
-          eum beatae consequuntur laboriosam quos.
+          Currently still in beta. The site is super jank right now still,
+          80% of it doesn&apos;t work lol.
         </p>
         <p className={styles.newsItem}>
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quibusdam

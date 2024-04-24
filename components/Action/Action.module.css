@@ -1,0 +1,47 @@
+.actionContainer {
+  height: 73px;
+}
+
+.leaderAbilityText {
+  position: relative;
+  display: block;
+  width: 52px;
+  bottom: 50px;
+  right: 0px;
+  text-align: center;
+  color: #fff;
+  text-shadow: 1px 1px black;
+}
+
+.sign {
+  position: relative;
+  display: block;
+  bottom: 42px;
+  left: 15px;
+  text-align: center;
+  font-size: 36px;
+  text-shadow: 1px 1px #fff;
+}
+
+.plus {
+  color: #5cea1e;
+}
+
+.minus {
+  color: red;
+}
+
+.restedPosition {
+    left: 23px;
+    bottom: 53px;
+}
+
+.textAction {
+  margin: auto 0px;
+  font-weight: bold;
+}
+
+.parenthesis {
+  font-size: 42px;
+  margin: auto 0px;
+}

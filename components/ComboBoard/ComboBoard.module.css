@@ -1,0 +1,27 @@
+.btnContainer {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  padding: 8px;
+}
+
+.curveTextContainer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.curveText {
+  font-weight: bold;
+}
+
+.comboContainer {
+  display: flex;
+  border: 2px solid pink;
+  border-radius: 12px;
+  max-height: 81px;
+  min-height: 81px;
+  gap: 16px;
+  padding: 10px;
+  flex-wrap: wrap;
+  overflow: scroll;
+}

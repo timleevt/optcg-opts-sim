@@ -22,17 +22,7 @@ const DeckLoaderHelpModal = ({ handleClose }: Props) => {
           <p>{bracketExport}</p>
           <h3>Text (sim / egmanevents )</h3>
           <p>Ex:</p>
-          <p style={{width: '100px'}}>
-            {textExport}
-            {/* {textExport.map((i) => {
-              return (
-                <>
-                  {i}
-                  <br/>
-                </>
-              );
-            })} */}
-          </p>
+          <p style={{ width: "100px" }}>{textExport}</p>
         </div>
       </div>
     </div>

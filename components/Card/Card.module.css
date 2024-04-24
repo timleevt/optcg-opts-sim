@@ -1,6 +1,7 @@
 .container {
   position: relative;
   max-height: 128px;
+  margin: auto 0px;
 }
 
 .numCopies {

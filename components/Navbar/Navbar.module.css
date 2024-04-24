@@ -19,4 +19,5 @@
 
 .link {
   margin: auto 16px;
+  text-wrap: nowrap;
 }

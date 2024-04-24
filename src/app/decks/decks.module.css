@@ -1,10 +1,16 @@
 .mainContent {
     display: flex;
     width: 95svw;
-    /* margin: auto; */
+    margin: auto;
     gap: 16px;
     justify-content: center;
 }
+
+.deckListPlaceholder {
+  width: 40svw;
+  text-align: center;
+}
+
 
 @media (max-width: 920px) {
     .mainContent {

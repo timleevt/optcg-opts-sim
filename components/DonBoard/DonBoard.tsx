@@ -7,7 +7,7 @@ type Props = {
 };
 
 const DonBoard = ({ numDon, handleDonChange }: Props) => {
-  let donCards: Array<React.JSX.Element> = []; // not sure about typing here
+  let donCards: Array<React.JSX.Element> = [];
   for (let i = 0; i < numDon; i++) {
     if (i === 0) {
       donCards.push(
