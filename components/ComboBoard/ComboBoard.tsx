@@ -1,9 +1,14 @@
+import { useForm } from "react-hook-form";
+import { useMemo } from "react";
+import * as yup from "yup";
 import Action from "../Action/Action";
 import Card from "../Card/Card";
 import styles from "./ComboBoard.module.css";
+import postCombo from "../../api/Deck/postCombo";
 
 type Props = {
   leader?: string;
+  deckId?: number;
   numDon: number;
   currBoard: Array<string>;
   comboBoard: Array<string>;
@@ -13,6 +18,7 @@ type Props = {
 };
 const ComboBoard = ({
   leader,
+  deckId,
   numDon,
   currBoard,
   comboBoard,
@@ -20,7 +26,9 @@ const ComboBoard = ({
   handleActionClick,
   setActiveBoard,
 }: Props) => {
-  const endCurve = () => {
+  const { register, handleSubmit } = useForm<ComboFormData>(); // typing later
+
+  const calculateEndCurve = () => {
     let rampCounter = 0;
     for (let i = 0; i < comboBoard.length; i++) {
       if (comboBoard[i] === "!active" || comboBoard[i] === "!rested") {
@@ -30,6 +38,31 @@ const ComboBoard = ({
       }
     }
     return numDon + rampCounter;
+  };
+
+  const schema = useMemo(
+    () =>
+      yup.object().shape({
+        comment: yup.string(),
+      }),
+    []
+  );
+
+  type ComboFormData = yup.InferType<typeof schema>;
+
+  // Submission of Combo
+  const onSubmit = async (data: ComboFormData) => {
+    const end = calculateEndCurve();
+    const req = {
+      deckId: deckId,
+      startCurve: numDon,
+      endCurve: end,
+      currBoard: currBoard,
+      comboBoard: comboBoard,
+      comment: data.comment,
+    };
+
+    return await postCombo(req);
   };
 
   return (
@@ -64,7 +97,9 @@ const ComboBoard = ({
       </div>
       <div className={styles.curveTextContainer}>
         <span className={styles.curveText}>Start Curve: {numDon}</span>
-        <span className={styles.curveText}>End Curve: {endCurve()}</span>
+        <span className={styles.curveText}>
+          End Curve: {calculateEndCurve()}
+        </span>
       </div>
       <h3>Current Board</h3>
       <div
@@ -93,8 +128,9 @@ const ComboBoard = ({
           );
         })}
       </div>
-      <form action="/">
+      <form onSubmit={handleSubmit(onSubmit)}>
         <textarea
+          {...register("comment")}
           name="comment"
           id=""
           rows={1}

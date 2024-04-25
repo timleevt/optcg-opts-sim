@@ -1,11 +1,13 @@
 "use client";
 import { useState } from "react";
 import styles from "./ComboListModal.module.css";
+import { ComboType } from "../../interface/Combo";
 
 type Props = {
   handleClose: (show: boolean) => void;
+  combos: ComboType[];
 };
-const ComboListModal = ({ handleClose }: Props) => {
+const ComboListModal = ({ handleClose, combos }: Props) => {
   const [curve, setCurve] = useState(1);
 
   const curveBtns = [];
@@ -38,10 +40,12 @@ const ComboListModal = ({ handleClose }: Props) => {
           <h2>Combo List</h2>
           <div className={styles.curveBtnContainer}>{curveBtns}</div>
           <p>
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-            Perferendis incidunt at et architecto consequuntur facilis! Eos
-            expedita ipsa, minus dicta, officiis perferendis quia suscipit nihil
-            dolores aperiam, similique fuga nesciunt?
+            {combos.map(i => {
+              return <div key={i.id}>
+                <span>{i.comboBoard}</span>
+                <span>{i.notes}</span>
+              </div>
+            })}
           </p>
         </div>
       </div>

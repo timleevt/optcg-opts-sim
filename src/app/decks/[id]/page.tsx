@@ -11,6 +11,8 @@ import ContentNav from "../../../../components/ContentNav/ContentNav";
 import DeckData from "../../../../components/DeckData/DeckData";
 import ComboArea from "../../../../components/ComboArea/ComboArea";
 import ComboListModal from "../../../../components/ComboListModal/ComboListModal";
+import getComboById from "../../../../api/Deck/getComboById";
+import { ComboType } from "../../../../interface/Combo";
 
 const Deck = ({ params }: { params: { id: number } }) => {
   // State variables
@@ -22,6 +24,7 @@ const Deck = ({ params }: { params: { id: number } }) => {
   const [currBoard, setCurrBoard] = useState<string[]>([]);
   const [comboBoard, setComboBoard] = useState<string[]>([]);
   const [showComboModal, setShowComboModal] = useState<boolean>(false);
+  const [combos, setCombos] = useState<ComboType[]>(); // fix typing
 
   // API Calls
   const retrieveDeckInfo = async () => {
@@ -34,10 +37,16 @@ const Deck = ({ params }: { params: { id: number } }) => {
     setDeckList(res);
   };
 
+  const retrieveCombos = async () => {
+    const res = await getComboById(params.id);
+    setCombos(res);
+  };
+
   // Use Effect Calls
   useEffect(() => {
     retrieveDeckInfo();
     retrieveDeckList();
+    retrieveCombos();
   }, []);
 
   // Event Handlers
@@ -89,7 +98,9 @@ const Deck = ({ params }: { params: { id: number } }) => {
 
   return (
     <div>
-      {showComboModal && <ComboListModal handleClose={setShowComboModal} />}
+      {showComboModal && (
+        <ComboListModal handleClose={setShowComboModal} combos={combos} />
+      )}
       {deckInfo && <DeckHeader deckInfo={deckInfo} />}
       <div className={styles.mainContent}>
         {deckList ? (
@@ -112,6 +123,7 @@ const Deck = ({ params }: { params: { id: number } }) => {
           {content === "combo" && (
             <ComboArea
               leader={deckInfo?.leader}
+              deckId={deckInfo?.id}
               numDon={numDon}
               handleDonChange={handleDonChange}
               currBoard={currBoard}
