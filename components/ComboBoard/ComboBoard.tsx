@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import { useMemo } from "react";
+import { useMemo, useRef } from "react";
 import * as yup from "yup";
 import Action from "../Action/Action";
 import Card from "../Card/Card";
@@ -26,7 +26,7 @@ const ComboBoard = ({
   handleActionClick,
   setActiveBoard,
 }: Props) => {
-  const { register, handleSubmit } = useForm<ComboFormData>(); // typing later
+  const { register, handleSubmit, reset } = useForm<ComboFormData>(); // typing later
 
   const calculateEndCurve = () => {
     let rampCounter = 0;
@@ -43,13 +43,19 @@ const ComboBoard = ({
   const schema = useMemo(
     () =>
       yup.object().shape({
-        comment: yup.string(),
+        deckId: yup.number(),
+        startCurve: yup.number(),
+        endCurve: yup.number(),
+        currBoard: yup.string(),
+        comboBoard: yup.string(),
+        notes: yup.string(),
       }),
     []
   );
 
   type ComboFormData = yup.InferType<typeof schema>;
 
+  const testRef = useRef();
   // Submission of Combo
   const onSubmit = async (data: ComboFormData) => {
     const end = calculateEndCurve();
@@ -59,10 +65,20 @@ const ComboBoard = ({
       endCurve: end,
       currBoard: currBoard,
       comboBoard: comboBoard,
-      comment: data.comment,
+      notes: data.notes,
     };
 
-    return await postCombo(req);
+    try {
+      await postCombo(req);
+      handleActionClick("!clearA");
+      reset({
+        notes: "",
+      });
+      alert("submitted!");
+    } catch (e) {
+      alert("Something went wrong");
+    }
+    return;
   };
 
   return (
@@ -94,6 +110,7 @@ const ComboBoard = ({
         </button>
         <button onClick={() => handleActionClick("!undo")}>Undo</button>
         <button onClick={() => handleActionClick("!clear")}>Clear</button>
+        <button onClick={() => handleActionClick("!clearA")}>Clear All</button>
       </div>
       <div className={styles.curveTextContainer}>
         <span className={styles.curveText}>Start Curve: {numDon}</span>
@@ -130,14 +147,18 @@ const ComboBoard = ({
       </div>
       <form onSubmit={handleSubmit(onSubmit)}>
         <textarea
-          {...register("comment")}
-          name="comment"
+          {...register("notes")}
+          name="notes"
           id=""
           rows={1}
           defaultValue="write more details about combo here"
           style={{ width: "100%", marginTop: "8px" }}
         ></textarea>
-        <button className={styles.btn} style={{ marginTop: "8px" }}>
+        <button
+          value="Submit"
+          className={styles.btn}
+          style={{ marginTop: "8px" }}
+        >
           Save
         </button>
       </form>

@@ -17,7 +17,7 @@ import { ComboType } from "../../../../interface/Combo";
 const Deck = ({ params }: { params: { id: number } }) => {
   // State variables
   const [deckInfo, setDeckInfo] = useState<DeckInfo | null>();
-  const [deckList, setDeckList] = useState<CardType[] | null>();
+  const [deckList, setDeckList] = useState<CardType[] | null>(null);
   const [content, setContent] = useState<string>("combo");
   const [numDon, setNumDon] = useState<number>(1);
   const [activeBoard, setActiveBoard] = useState<string>("current");
@@ -46,8 +46,12 @@ const Deck = ({ params }: { params: { id: number } }) => {
   useEffect(() => {
     retrieveDeckInfo();
     retrieveDeckList();
-    retrieveCombos();
   }, []);
+
+  // see if this ends up being too expensive
+  useEffect(() => {
+    retrieveCombos();
+  }, [showComboModal]);
 
   // Event Handlers
   const handleDonChange = (num: number) => {
@@ -67,6 +71,12 @@ const Deck = ({ params }: { params: { id: number } }) => {
   };
 
   const handleActionClick = (action: string) => {
+    if (action === "!clearA") {
+      setComboBoard([]);
+      setCurrBoard([]);
+      return;
+    }
+
     let targetBoard = activeBoard === "current" ? currBoard : comboBoard;
 
     if (action === "!clear") {
@@ -98,7 +108,7 @@ const Deck = ({ params }: { params: { id: number } }) => {
 
   return (
     <div>
-      {showComboModal && (
+      {showComboModal && combos && (
         <ComboListModal handleClose={setShowComboModal} combos={combos} />
       )}
       {deckInfo && <DeckHeader deckInfo={deckInfo} />}
@@ -118,8 +128,8 @@ const Deck = ({ params }: { params: { id: number } }) => {
             setContent={setContent}
             handleComboModal={handleComboModal}
           />
-          {content === "data" && <DeckData />}
-          {content === "matchup" && <DeckData />}
+          {content === "data" && <DeckData deckList={deckList} />}
+          {content === "matchup" && <DeckData deckList={deckList} />}
           {content === "combo" && (
             <ComboArea
               leader={deckInfo?.leader}

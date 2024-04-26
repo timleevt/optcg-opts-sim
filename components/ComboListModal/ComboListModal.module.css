@@ -47,6 +47,12 @@
     text-decoration: underline;
 }
 
+.boardContainer {
+  display: flex;
+  overflow: scroll;
+  gap: 12px;
+}
+
 @media (max-width: 986px) {
   .modalContent {
     max-width: 70%;
@@ -64,3 +70,4 @@
     flex-wrap: wrap;
   }
 }
+
