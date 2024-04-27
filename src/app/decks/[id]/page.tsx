@@ -13,6 +13,9 @@ import ComboArea from "../../../../components/ComboArea/ComboArea";
 import ComboListModal from "../../../../components/ComboListModal/ComboListModal";
 import getComboById from "../../../../api/Deck/getComboById";
 import { ComboType } from "../../../../interface/Combo";
+import getLeaders from "../../../../api/Deck/getLeaders";
+import Matchup from "../../../../components/Matchup/Matchup";
+import MatchHistory from "../../../../components/MatchHistory/MatchHistory";
 
 const Deck = ({ params }: { params: { id: number } }) => {
   // State variables
@@ -25,6 +28,7 @@ const Deck = ({ params }: { params: { id: number } }) => {
   const [comboBoard, setComboBoard] = useState<string[]>([]);
   const [showComboModal, setShowComboModal] = useState<boolean>(false);
   const [combos, setCombos] = useState<ComboType[]>(); // fix typing
+  const [leaders, setLeaders] = useState<CardType[] | null>(null);
 
   // API Calls
   const retrieveDeckInfo = async () => {
@@ -42,10 +46,16 @@ const Deck = ({ params }: { params: { id: number } }) => {
     setCombos(res);
   };
 
+  const retrieveLeaders = async () => {
+    const res = await getLeaders();
+    setLeaders(res);
+  }
+
   // Use Effect Calls
   useEffect(() => {
     retrieveDeckInfo();
     retrieveDeckList();
+    retrieveLeaders();
   }, []);
 
   // see if this ends up being too expensive
@@ -130,8 +140,8 @@ const Deck = ({ params }: { params: { id: number } }) => {
             handleComboModal={handleComboModal}
           />
           {content === "data" && <DeckData deckList={deckList} />}
-          {content === "matchup" && <h1>Coming soon...</h1> }
-          {content === "track" && <h1>Coming soon...</h1> }
+          {content === "matchup" && <Matchup leaders={leaders}/> }
+          {content === "track" && <MatchHistory leaders={leaders}/> }
           {content === "combo" && (
             <ComboArea
               leader={deckInfo?.leader}

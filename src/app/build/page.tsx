@@ -9,7 +9,8 @@ const Build = () => {
 
   if (deck) {
     return (
-      <DeckListContainer deck={deck}/>
+      // <DeckListContainer deck={deck}/>""
+      <h2>todo..</h2>
     );
   }
   return (

@@ -4,8 +4,12 @@ const retrieveDeckData = async (req: any): Promise<any> => {
       let res = await fetch(url, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({deck: req})
-      });
+        body: JSON.stringify({deck: req}),
+        next: {
+          revalidate: 3600
+        }
+      },
+    );
       return res;
     } catch (e) {
       console.log(e);

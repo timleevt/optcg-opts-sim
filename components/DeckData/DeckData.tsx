@@ -29,6 +29,7 @@ export default function DeckData({ deckList }: Props) {
   const getDeckData = async () => {
     await retrieveDeckData(deckList)
       .then((response) => {
+        console.log(response);
         if (!response.ok) {
           throw new Error("Network response was not ok");
         }
