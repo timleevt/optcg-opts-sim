@@ -19,14 +19,10 @@ export default function Home() {
       <div>
         <h2 style={{textAlign: "center"}}>News & Updates</h2>
         <p className={styles.newsItem}>
-          Currently still in beta. The site is super jank right now still,
-          80% of it doesn&apos;t work lol.
+          Currently still in beta. The site is still super jank right now.
         </p>
         <p className={styles.newsItem}>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quibusdam
-          totam sequi quae error cum hic reiciendis itaque distinctio, incidunt
-          officiis debitis ipsa asperiores reprehenderit voluptas deleniti
-          magni? Quasi, tenetur quos.
+          Some news stuff here...
         </p>
       </div>
     </main>

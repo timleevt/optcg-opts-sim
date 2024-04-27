@@ -37,6 +37,12 @@ const ContentNav = ({ content, setContent, handleComboModal }: Props) => {
       >
         Matchup
       </button>
+      <button
+        onClick={() => handleClick("track")}
+        style={content === "track" ? activeStyle : {}}
+      >
+        Match Tracker
+      </button>
     </div>
   );
 };

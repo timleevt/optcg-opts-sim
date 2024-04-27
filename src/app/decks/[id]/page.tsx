@@ -118,6 +118,7 @@ const Deck = ({ params }: { params: { id: number } }) => {
             deck={deckList}
             handleCardClick={handleCardClick}
             numDon={numDon}
+            content={content}
           />
         ) : (
           <div className={styles.deckListPlaceholder}>loading...</div>
@@ -129,7 +130,8 @@ const Deck = ({ params }: { params: { id: number } }) => {
             handleComboModal={handleComboModal}
           />
           {content === "data" && <DeckData deckList={deckList} />}
-          {content === "matchup" && <DeckData deckList={deckList} />}
+          {content === "matchup" && <h1>Coming soon...</h1> }
+          {content === "track" && <h1>Coming soon...</h1> }
           {content === "combo" && (
             <ComboArea
               leader={deckInfo?.leader}

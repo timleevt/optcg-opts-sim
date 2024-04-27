@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import { useMemo, useRef } from "react";
+import { useMemo, useState } from "react";
 import * as yup from "yup";
 import Action from "../Action/Action";
 import Card from "../Card/Card";
@@ -26,7 +26,8 @@ const ComboBoard = ({
   handleActionClick,
   setActiveBoard,
 }: Props) => {
-  const { register, handleSubmit, reset } = useForm<ComboFormData>(); // typing later
+  const { register, handleSubmit, reset } = useForm<ComboFormData>();
+  const [comboSubmitConfirmPopup, setComboSubmitConfirmPopup] = useState(false);
 
   const calculateEndCurve = () => {
     let rampCounter = 0;
@@ -55,8 +56,14 @@ const ComboBoard = ({
 
   type ComboFormData = yup.InferType<typeof schema>;
 
-  const testRef = useRef();
   // Submission of Combo
+  const showSubmitPopup = () => {
+    setComboSubmitConfirmPopup(true);
+    setTimeout(() => {
+      setComboSubmitConfirmPopup(false);
+    }, 3000);
+  };
+
   const onSubmit = async (data: ComboFormData) => {
     const end = calculateEndCurve();
     const req = {
@@ -74,7 +81,7 @@ const ComboBoard = ({
       reset({
         notes: "",
       });
-      alert("submitted!");
+      showSubmitPopup();
     } catch (e) {
       alert("Something went wrong");
     }
@@ -162,6 +169,7 @@ const ComboBoard = ({
           Save
         </button>
       </form>
+      <div className={comboSubmitConfirmPopup ? styles.submitPopup : styles.submitPopupHidden}>Combo Added!</div>
     </div>
   );
 };

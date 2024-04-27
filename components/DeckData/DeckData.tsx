@@ -1,48 +1,140 @@
+import { useEffect, useState } from "react";
 import { CardType } from "../../interface/Card";
+import retrieveDeckData from "../../api/Deck/retrieveDeckData";
 
 type Props = {
   deckList: CardType[] | null;
-}
+};
 
-export default function DeckData({deckList}:Props) {
-  if (!deckList) {
-    return <div>Loading...</div>
+type Stats = {
+  attribute: { [key: string]: number };
+  cardType: {
+    character: number;
+    event: number;
+    stage: number;
+  };
+  cost: { [key: number]: number };
+  counter: {
+    c1k: number;
+    c2k: number;
+    event: number;
+  };
+  power: { [key: number]: number };
+  type: { [key: string]: number };
+};
+
+export default function DeckData({ deckList }: Props) {
+  const [stats, setStats] = useState<Stats | null>(null);
+
+  const getDeckData = async () => {
+    await retrieveDeckData(deckList)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        setStats(data);
+      });
+  };
+
+  useEffect(() => {
+    if (deckList) {
+      getDeckData();
+    }
+  }, [deckList]);
+
+  if (!deckList || !stats) {
+    return <div>Loading...</div>;
   }
 
-  let count1k = 0;
-  let count2k = 0;
-
-  for(let i = 0; i < deckList.length; i++) {
-    if(deckList[i].counterPower === 1000) {
-      count1k += deckList[i].copies;
-    } else if(deckList[i].counterPower === 2000) {
-      count2k += deckList[i].copies;
+  const attributes = [];
+  const types = [];
+  const power = [];
+  const cost = [];
+  if (stats) {
+    for (const [key, value] of Object.entries(stats.attribute)) {
+      if (key.length > 0) {
+        attributes.push(
+          <p>
+            {key} : {value}
+          </p>
+        );
+      }
+    }
+    for (const [key, value] of Object.entries(stats.type)) {
+      if (key.length > 0) {
+        types.push(
+          <p>
+            {key} : {value}
+          </p>
+        );
+      }
+    }
+    for (const [key, value] of Object.entries(stats.power)) {
+      if (key !== "null") {
+        power.push(
+          <p>
+            {key} : {value}
+          </p>
+        );
+      }
+    }
+    for (const [key, value] of Object.entries(stats.cost)) {
+      if (key.length > 0) {
+        cost.push(
+          <p>
+            {key} : {value}
+          </p>
+        );
+      }
     }
   }
-  return (
 
-    <div>
-      <h2>Counter</h2>
-      <p>1k: {count1k}</p>
-      <p>2k: {count2k}</p>
-      <h2>Keyword</h2>
-      <p>Trigger: 10</p>
-      <p>Blocker: 10</p>
-      <p>Banish: 5</p>
-      <p>Rush: 5</p>
-      <h2>Card Type</h2>
-      <p>Char: 10</p>
-      <p>Event: 10</p>
-      <p>Stage: 10</p>
-      <h2>Attribute</h2>
-      <p>Range: 10</p>
-      <p>Slash: 10</p>
-      <h2>Attribute</h2>
-      <p>Range: 10</p>
-      <p>Slash: 10</p>
-      <h1>Type</h1>
-      <p>Land of Wano: 10</p>
-      <p>Whitebeard Pirates: 10</p> 
+  return (
+    <div
+      style={{
+        display: "flex",
+        flexWrap: "wrap",
+        gap: "16px",
+        justifyContent: "space-between",
+      }}
+    >
+      <div>
+        <h2>Counter</h2>
+        <p>1k: {stats.counter["c1k"]}</p>
+        <p>2k: {stats.counter["c2k"]}</p>
+      </div>
+      <div>
+        <h2>Keyword</h2>
+        <p>Trigger: TODO</p>
+        <p>Blocker: TODO</p>
+        <p>Banish: TODO</p>
+        <p>Rush: TODO</p>
+      </div>
+      <div>
+        <h2>Card Type</h2>
+        <p>Char: {stats.cardType["character"]}</p>
+        <p>Event: {stats.cardType["event"]}</p>
+        <p>Stage: {stats.cardType["stage"]}</p>
+      </div>
+      <div>
+        <h2>Attribute</h2>
+        {attributes}
+      </div>
+      <div>
+        <h2>Type</h2>
+        {types}
+      </div>
+      <div>
+        <h2>Power</h2>
+        {power}
+      </div>
+      <div>
+        <h2>Cost</h2>
+        {cost}
+      </div>
     </div>
   );
 }

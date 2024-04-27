@@ -25,3 +25,24 @@
   flex-wrap: wrap;
   overflow: scroll;
 }
+
+.submitPopup {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 10px;
+  border-radius: 12px;
+  z-index: 2;
+  border: 1px solid rgb(72, 199, 142);
+  background-color: rgb(72, 199, 142);
+  color: white;
+  visibility: visible;
+  opacity: 1;
+  transition: opacity 1s linear;
+}
+
+.submitPopupHidden {
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s 2s, opacity 2s linear;
+}

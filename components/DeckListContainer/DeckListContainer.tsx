@@ -6,9 +6,15 @@ type Props = {
   deck: CardType[] | null; // take off null later
   handleCardClick: (code: string) => void;
   numDon: number;
+  content: string;
 };
 
-const DeckListContainer = ({ deck, handleCardClick, numDon }: Props) => {
+const DeckListContainer = ({
+  deck,
+  handleCardClick,
+  numDon,
+  content,
+}: Props) => {
   return (
     <div className={styles.container}>
       {deck?.map((i) => {
@@ -17,7 +23,10 @@ const DeckListContainer = ({ deck, handleCardClick, numDon }: Props) => {
             key={i.code}
             cardType={i.cardType}
             code={i.code}
-            active={i.cost != null && numDon >= i.cost}
+            active={
+              content !== "combo" ||
+              (content === "combo" && i.cost != null && numDon >= i.cost)
+            }
             numCopies={i.copies}
             handleCardClick={handleCardClick}
           />

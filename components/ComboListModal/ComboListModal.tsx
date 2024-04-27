@@ -16,6 +16,7 @@ const ComboListModal = ({ handleClose, combos }: Props) => {
   for (let i = 1; i <= 10; i++) {
     curveBtns.push(
       <button
+        key={i}
         onClick={() => setCurve(i)}
         style={
           curve === i ? { fontWeight: "bold", textDecoration: "underline" } : {}
@@ -46,7 +47,7 @@ const ComboListModal = ({ handleClose, combos }: Props) => {
               .filter((x) => x.startCurve === curve)
               .map((i) => {
                 return (
-                  <>
+                  <div key={i.startCurve + i.id}>
                     {i.currBoard.length !== 0 && (
                       <>
                       <span style={{fontSize: '8px'}}>board:</span>
@@ -99,7 +100,7 @@ const ComboListModal = ({ handleClose, combos }: Props) => {
                     </div>
                     <p style={{fontSize: '12px'}}>{i.notes}</p>  
                     <hr />
-                  </>
+                  </div>
                 );
               })}
           </div>
