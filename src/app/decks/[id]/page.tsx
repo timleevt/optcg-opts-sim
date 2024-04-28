@@ -16,6 +16,17 @@ import { ComboType } from "../../../../interface/Combo";
 import getLeaders from "../../../../api/Deck/getLeaders";
 import Matchup from "../../../../components/Matchup/Matchup";
 import MatchHistory from "../../../../components/MatchHistory/MatchHistory";
+import getMatchHistory from "../../../../api/Deck/getMatchHistory";
+
+type MatchData = {
+  id: string;
+  deckId: number;
+  leader: string;
+  eventName: string;
+  diceResult: string;
+  result: string;
+  turnOrder: number;
+};
 
 const Deck = ({ params }: { params: { id: number } }) => {
   // State variables
@@ -29,11 +40,14 @@ const Deck = ({ params }: { params: { id: number } }) => {
   const [showComboModal, setShowComboModal] = useState<boolean>(false);
   const [combos, setCombos] = useState<ComboType[]>(); // fix typing
   const [leaders, setLeaders] = useState<CardType[] | null>(null);
+  const [matchHistory, setMatchHistory] = useState<MatchData[]>([]);
 
   // API Calls
   const retrieveDeckInfo = async () => {
     const res = await getDeckInfo(params.id);
+    const matchHistory = await getMatchHistory(res.id);
     setDeckInfo(res);
+    setMatchHistory(matchHistory);
   };
 
   const retrieveDeckList = async () => {
@@ -49,7 +63,7 @@ const Deck = ({ params }: { params: { id: number } }) => {
   const retrieveLeaders = async () => {
     const res = await getLeaders();
     setLeaders(res);
-  }
+  };
 
   // Use Effect Calls
   useEffect(() => {
@@ -123,15 +137,13 @@ const Deck = ({ params }: { params: { id: number } }) => {
       )}
       {deckInfo && <DeckHeader deckInfo={deckInfo} />}
       <div className={styles.mainContent}>
-        {deckList ? (
+        {content !== "matchup" && content !== "track" && (
           <DeckListContainer
             deck={deckList}
             handleCardClick={handleCardClick}
             numDon={numDon}
             content={content}
           />
-        ) : (
-          <div className={styles.deckListPlaceholder}>loading...</div>
         )}
         <div>
           <ContentNav
@@ -140,8 +152,16 @@ const Deck = ({ params }: { params: { id: number } }) => {
             handleComboModal={handleComboModal}
           />
           {content === "data" && <DeckData deckList={deckList} />}
-          {content === "matchup" && <Matchup leaders={leaders}/> }
-          {content === "track" && <MatchHistory leaders={leaders}/> }
+          {content === "matchup" && (
+            <Matchup matchHistory={matchHistory} leaders={leaders} />
+          )}
+          {content === "track" && deckInfo && (
+            <MatchHistory
+              matchHistory={matchHistory}
+              deckId={deckInfo.id}
+              leaders={leaders}
+            />
+          )}
           {content === "combo" && (
             <ComboArea
               leader={deckInfo?.leader}

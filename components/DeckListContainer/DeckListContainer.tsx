@@ -15,6 +15,9 @@ const DeckListContainer = ({
   numDon,
   content,
 }: Props) => {
+  if(!deck) {
+    return <div>Loading...</div>
+  }
   return (
     <div className={styles.container}>
       {deck?.map((i) => {

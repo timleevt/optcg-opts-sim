@@ -1,33 +1,62 @@
+import { useEffect, useState } from "react";
 import { CardType } from "../../interface/Card";
 import Card from "../Card/Card";
 import RecordMatchModal from "../RecordMatchModal/RecordMatchModal";
 import styles from "./MatchHistory.module.css";
+import getMatchHistory from "../../api/Deck/getMatchHistory";
 
 type Props = {
+  deckId: number;
   leaders: CardType[] | null;
-}
+  matchHistory: MatchData[];
+};
 
-const MatchHistory = ({leaders}:Props) => {
-  if(!leaders) {
-    return <div>loading...</div>
+type MatchData = {
+  id: string;
+  deckId: number;
+  leader: string;
+  eventName: string;
+  diceResult: string;
+  result: string;
+  turnOrder: number;
+};
+
+const MatchHistory = ({ deckId, leaders, matchHistory }: Props) => {
+  const [showRecordModal, setShowRecordModal] = useState(false);
+
+  if (!leaders && !matchHistory) {
+    return <div>loading...</div>;
   }
+
   return (
     <div className={styles.container}>
-      <button className={styles.btn}>Record Match</button>
+      <button className={styles.btn} onClick={() => setShowRecordModal(true)}>
+        Record Match
+      </button>
       <hr style={{ width: "100%" }} />
-      <div className={styles.matchHistoryContainer}>
-        <span>VS.</span>{" "}
-        <Card code={"OP06-080"} mini active handleCardClick={() => {}} />
-        <span>&#9861; WIN</span>
-        <span>Turn: 1st</span>
+      <div className={styles.matchesContainer}>
+      {matchHistory.map((i) => {
+        return (
+          <div
+            key={i.id}
+            className={styles.matchHistoryContainer}
+            style={i.result === "L" ? { backgroundColor: "#ffe4e6" } : {}}
+          >
+            <span>VS.</span>{" "}
+            <Card code={i.leader} mini active handleCardClick={() => {}} />
+            <span>&#9861; {i.diceResult}</span>
+            <span>Turn: {i.turnOrder === 1 ? 'First' : 'Second'}</span>
+          </div>
+        );
+      })}
       </div>
-      <div className={`${styles.matchHistoryContainer} ${styles.loss}`}>
-        <span>VS.</span>{" "}
-        <Card code={"OP06-080"} mini active handleCardClick={() => {}} />
-        <span>&#9861; LOSS</span>
-        <span>Turn: 2nd</span>
-      </div>
-      {/* <RecordMatchModal leaders={leaders}/> */}
+      {showRecordModal && (
+        <RecordMatchModal
+          deckId={deckId}
+          leaders={leaders}
+          handleClose={setShowRecordModal}
+        />
+      )}
     </div>
   );
 };
