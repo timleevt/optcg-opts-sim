@@ -3,7 +3,7 @@ import { CardType } from "../../interface/Card";
 import Card from "../Card/Card";
 import RecordMatchModal from "../RecordMatchModal/RecordMatchModal";
 import styles from "./MatchHistory.module.css";
-import getMatchHistory from "../../api/Deck/getMatchHistory";
+// import getMatchHistory from "../../api/Deck/getMatchHistory";
 
 type Props = {
   deckId: number;
