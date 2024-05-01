@@ -26,22 +26,18 @@ type Stats = {
 export default function DeckData({ deckList }: Props) {
   const [stats, setStats] = useState<Stats | null>(null);
 
-  const getDeckData = async () => {
-    await retrieveDeckData(deckList)
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        return response.json();
-      })
-      .then((data) => {
-        setStats(data);
-      });
-  };
-
   useEffect(() => {
     if (deckList) {
-      getDeckData();
+      retrieveDeckData(deckList)
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Network response was not ok");
+          }
+          return response.json();
+        })
+        .then((data) => {
+          setStats(data);
+        });
     }
   }, [deckList]);
 
