@@ -1,7 +1,7 @@
 "use client";
 
-import getDeckInfo from "../../../../api/Deck/getDeckInfo";
-import getDeckListById from "../../../../api/Deck/getDeckListById";
+import getDeckInfo from "../../../api/Deck/getDeckInfo";
+import getDeckListById from "../../../api/Deck/getDeckListById";
 import DeckHeader from "../../../../components/DeckHeader/DeckHeader";
 import DeckListContainer from "../../../../components/DeckListContainer/DeckListContainer";
 import { useEffect, useState } from "react";
@@ -11,12 +11,12 @@ import ContentNav from "../../../../components/ContentNav/ContentNav";
 import DeckData from "../../../../components/DeckData/DeckData";
 import ComboArea from "../../../../components/ComboArea/ComboArea";
 import ComboListModal from "../../../../components/ComboListModal/ComboListModal";
-import getComboById from "../../../../api/Deck/getComboById";
 import { ComboType } from "../../../../interface/Combo";
-import getLeaders from "../../../../api/Deck/getLeaders";
 import Matchup from "../../../../components/Matchup/Matchup";
 import MatchHistory from "../../../../components/MatchHistory/MatchHistory";
-import getMatchHistory from "../../../../api/Deck/getMatchHistory";
+import getMatchHistory from "@/api/Deck/getMatchHistory";
+import getComboById from "@/api/Deck/getComboById";
+import getLeaders from "@/api/Deck/getLeaders";
 
 type MatchData = {
   id: string;

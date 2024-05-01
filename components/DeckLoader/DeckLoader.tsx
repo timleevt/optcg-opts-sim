@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import styles from "./DeckLoader.module.css";
 import DeckLoaderHelpModal from "../DeckLoaderHelpModal/DeckLoaderHelpModal";
-import submitDeckList from "../../api/Deck/submitDeckList";
+import submitDeckList from "../../src/api/Deck/submitDeckList";
 import { CardType } from "../../interface/Card";
 import { useUserContext } from "@/context/userContext";
 import { useRouter } from "next/navigation";

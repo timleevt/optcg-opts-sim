@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { postLogin } from "../../../api/auth/postLogin";
+import { postLogin } from "@/api/auth/postLogin";
 import { useUserContext } from "@/context/userContext";
 import styles from "./login.module.css";
 

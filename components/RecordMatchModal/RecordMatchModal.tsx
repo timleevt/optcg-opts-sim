@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { CardType } from "../../interface/Card";
 import styles from "./RecordMatchModal.module.css";
-import postMatchResult from "../../api/Deck/postMatchResult";
+import postMatchResult from "../../src/api/Deck/postMatchResult";
 
 type Props = {
   deckId: number;

@@ -4,7 +4,7 @@ import * as yup from "yup";
 import Action from "../Action/Action";
 import Card from "../Card/Card";
 import styles from "./ComboBoard.module.css";
-import postCombo from "../../api/Deck/postCombo";
+import postCombo from "../../src/api/Deck/postCombo";
 
 type Props = {
   leader?: string;

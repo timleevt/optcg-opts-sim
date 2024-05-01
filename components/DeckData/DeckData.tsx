@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { CardType } from "../../interface/Card";
-import retrieveDeckData from "../../api/Deck/retrieveDeckData";
+import retrieveDeckData from "../../src/api/Deck/retrieveDeckData";
 
 type Props = {
   deckList: CardType[] | null;
