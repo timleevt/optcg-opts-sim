@@ -4,9 +4,7 @@ import styles from "./DeckListTable.module.css";
 async function getListOfDecks() {
   const url = process.env.NEXT_PUBLIC_API_BASE_URL + "deck/list";
   const res = await fetch(url, {
-    next: {
-      revalidate: 500,
-    },
+    cache: 'no-store',
   });
   return res.json();
 }

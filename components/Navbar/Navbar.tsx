@@ -1,15 +1,28 @@
-'use client';
+"use client";
 import Link from "next/link";
 import styles from "./Navbar.module.css";
-// import { useUserContext } from "@/context/userContext";
+import { useUserContext } from "@/context/userContext";
+import axios from "axios";
+import { useRouter } from "next/navigation";
 
 const Navbar = () => {
-  // Sample of usecontext -- use as reference
-  // const u = useUserContext();
-  // if(u) {
-  //   console.log(u.username);
-  // }
-  
+  const { user, logout } = useUserContext();
+  const url = process.env.NEXT_PUBLIC_API_BASE_URL + `auth/logout`;
+  const router = useRouter();
+
+  const handleLogout = async () => {
+    try {
+      await axios.get(url, { withCredentials: true });
+      logout();
+      router.push("/login");
+    } catch (error) {
+      if (typeof error === "string") {
+        console.log(error);
+      } else {
+        throw Error;
+      }
+    }
+  };
 
   return (
     <nav className={styles.container}>
@@ -30,6 +43,11 @@ const Navbar = () => {
       <Link className={styles.link} href="/build">
         Build
       </Link>
+      {user && (
+        <button className={styles.logoutBtn} onClick={handleLogout}>
+          Logout
+        </button>
+      )}
     </nav>
   );
 };

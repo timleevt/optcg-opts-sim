@@ -21,3 +21,10 @@
   margin: auto 16px;
   text-wrap: nowrap;
 }
+
+.logoutBtn {
+  box-sizing: content-box;
+  height: 15px;
+  margin: auto 0px;
+  /* padding: 0px; */
+}
