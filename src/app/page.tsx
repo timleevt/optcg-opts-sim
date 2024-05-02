@@ -18,6 +18,7 @@ export default function Home() {
       </div>
       <div>
         <h2 style={{textAlign: "center"}}>News & Updates</h2>
+        <p className={styles.newsItem}>5/2/24 Initial Deployment</p>
         <p className={styles.newsItem}>
           Currently still in beta. The site is still super jank right now.
         </p>
