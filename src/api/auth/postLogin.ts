@@ -14,6 +14,7 @@ export const postLogin = async (request: UserData) => {
     const headers = new Headers();
     headers.append("Content-Type", "application/json");
     headers.append("Accept", "application/json");
+    headers.append("Access-Control-Allow-Origin", "*");
     // Check user exists
     const user = await fetch(GET_LOGIN_URL, {
       method: "POST",
