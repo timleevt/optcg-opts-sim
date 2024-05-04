@@ -21,11 +21,11 @@ type Stats = {
   };
   power: { [key: number]: number };
   type: { [key: string]: number };
+  keywords: { [key: string]: number};
 };
 
 export default function DeckData({ deckList }: Props) {
   const [stats, setStats] = useState<Stats | null>(null);
-
   useEffect(() => {
     if (deckList) {
       retrieveDeckData(deckList)
@@ -78,7 +78,7 @@ export default function DeckData({ deckList }: Props) {
       }
     }
     for (const [key, value] of Object.entries(stats.cost)) {
-      if (key.length > 0) {
+      if (key.length > 0 && key !== "null") {
         cost.push(
           <p>
             {key} : {value}
@@ -104,10 +104,11 @@ export default function DeckData({ deckList }: Props) {
       </div>
       <div>
         <h2>Keyword</h2>
-        <p>Trigger: TODO</p>
-        <p>Blocker: TODO</p>
-        <p>Banish: TODO</p>
-        <p>Rush: TODO</p>
+        <p>Trigger: {stats.keywords.Trigger || 0}</p>
+        <p>Blocker: {stats.keywords.Blocker || 0}</p>
+        <p>Banish: {stats.keywords.Banish || 0}</p>
+        <p>Rush: {stats.keywords.Rush || 0}</p>
+        <p>Double Attack: {stats.keywords.DoubleAttack || 0}</p>
       </div>
       <div>
         <h2>Card Type</h2>

@@ -21,7 +21,6 @@ export function UserContextProvider({
 }: {
   children: React.ReactNode;
 }) {
-  // const [user, setUser] = useState<UserContext>({username: '', id: ''});
   const [user, setUser] = useState<string | null>(null);
   const url = process.env.NEXT_PUBLIC_API_BASE_URL + `auth/profile`;
 
@@ -36,9 +35,7 @@ export function UserContextProvider({
         .then(({ data }) => {
           setUser(data.username);
         })
-        .catch((error) => {
-          console.log(error);
-        });
+        .catch((error) => {});
     }
   }, []);
 

@@ -21,6 +21,7 @@ const DeckListContainer = ({
   return (
     <div className={styles.container}>
       {deck?.map((i) => {
+        if (i.cardType === "Leader") { return; }
         return (
           <Card
             key={i.code}
