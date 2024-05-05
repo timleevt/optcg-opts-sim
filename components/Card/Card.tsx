@@ -32,14 +32,20 @@ const Card = ({
   numCopies,
   handleCardClick,
 }: Props) => {
+  const set = code.split("-")[0];
   return (
     // TODO: figure out placeholder loader for Image
     <div className={styles.container}>
       <Image
+        // src={
+        //   "https://en.onepiece-cardgame.com/images/cardlist/card/" +
+        //   code +
+        //   ".png?240202"
+        // }
         src={
-          "https://en.onepiece-cardgame.com/images/cardlist/card/" +
+          `/images/cards/${set}/` +
           code +
-          ".png?240202"
+          ".jpg"
         }
         width={mini ? 52 : 92}
         height={mini ? 73 : 128}
