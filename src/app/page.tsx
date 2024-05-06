@@ -6,25 +6,22 @@ export default function Home() {
     <main className={styles.main}>
       <div className={styles.landing}>
         <h1 className={styles.setTxt}>
-          Current Set: <br />
-          OP06
+          Current Set:
+          EB01
         </h1>
         <Image
-          src="/currentSet.png"
-          alt="Current Set: OP06"
-          height={500}
+          src="/currentSet.jpg"
+          alt="Current Set: EB01"
+          height={300}
           width={500}
+          priority
+          className={styles.banner}
           />
       </div>
       <div>
         <h2 style={{textAlign: "center"}}>News & Updates</h2>
+        <p className={styles.newsItem}>5/6/24 Fixing Bugs</p>
         <p className={styles.newsItem}>5/2/24 Initial Deployment</p>
-        <p className={styles.newsItem}>
-          Currently still in beta. The site is still super jank right now.
-        </p>
-        <p className={styles.newsItem}>
-          Some news stuff here...
-        </p>
       </div>
     </main>
   );

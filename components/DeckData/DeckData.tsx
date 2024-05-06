@@ -89,7 +89,26 @@ export default function DeckData({ deckList }: Props) {
   }
 
   return (
-    <div
+    <>
+    <div>re-doing the table..</div>
+    <table style={{textAlign: 'left'}}>
+      <tr>
+        <th>Counter</th>
+      </tr>
+      <tr>
+        <th>1k:</th>
+        <td>{stats.counter["c1k"]}</td>
+      </tr>
+      <tr>
+        <th>2k:</th>
+        <td>{stats.counter["c2k"]}</td>
+      </tr>
+      <tr>
+        <th>Event Counter:</th>
+        <td>TODO</td>
+      </tr>
+    </table>
+    {/* <div
       style={{
         display: "flex",
         flexWrap: "wrap",
@@ -132,6 +151,7 @@ export default function DeckData({ deckList }: Props) {
         <h2>Cost</h2>
         {cost}
       </div>
-    </div>
+    </div> */}
+    </>
   );
 }

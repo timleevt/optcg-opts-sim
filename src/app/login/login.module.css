@@ -1,40 +1,50 @@
 .background {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 3;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 3;
 }
 
 .formContainer {
-    z-index: 4;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    width: 30%;
-    margin: 0px auto;
-    border: 1px solid black;
-    height: 40svh;
-    justify-content: space-evenly;
-    color: white;
-    border-radius: 12px;
-    border: 1px solid white;
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 30%;
+  margin: 0px auto;
+  border: 1px solid black;
+  height: 40svh;
+  justify-content: space-evenly;
+  color: white;
 }
 
 .formItem {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    width: 80%;
-    margin: 0px auto;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 80%;
+  margin: 0px auto;
 }
 
 .loginBtn {
-    width: 50%;
-    margin: 0px auto;
+  width: 50%;
+  margin: 0px auto;
+}
+
+@media (max-width: 705px) {
+  .formContainer {
+    width: 60%;
+  }
+}
+
+@media (max-width: 370px) {
+  .formContainer {
+    width: 80%;
+  }
 }

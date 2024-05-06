@@ -6,10 +6,11 @@ import Action from "../Action/Action";
 import Card from "../Card/Card";
 
 type Props = {
+  leader: string;
   handleClose: (show: boolean) => void;
   combos: ComboType[];
 };
-const ComboListModal = ({ handleClose, combos }: Props) => {
+const ComboListModal = ({ leader, handleClose, combos }: Props) => {
   const [curve, setCurve] = useState(1);
 
   const curveBtns = [];
@@ -57,7 +58,7 @@ const ComboListModal = ({ handleClose, combos }: Props) => {
                             return (
                               <Action
                                 key={index}
-                                leaderCode={"OP06-080"}
+                                leaderCode={leader}
                                 action={c}
                               />
                             );
@@ -82,7 +83,7 @@ const ComboListModal = ({ handleClose, combos }: Props) => {
                           return (
                             <Action
                               key={index}
-                              leaderCode={"OP06-080"}
+                              leaderCode={leader}
                               action={c}
                             />
                           );

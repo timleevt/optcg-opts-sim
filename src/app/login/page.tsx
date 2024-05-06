@@ -31,7 +31,9 @@ export default function LoginPage() {
     }
     try {
       setLoading(true);
-      const result = await postLogin(username);
+      const result = await postLogin(username).then((res) => {
+        return res;
+      });
       setUser(result.user);
       router.push("/");
     } catch (error) {

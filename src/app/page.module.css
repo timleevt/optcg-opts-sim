@@ -8,6 +8,7 @@
   min-height: 500px;
   border: 2px solid black;
   justify-content: center;
+  gap: 8px;
 }
 
 .newsItem {
@@ -17,13 +18,20 @@
 }
 
 @media (max-width: 705px) {
-  .setTxt {
-    display: none;
+
+  .landing {
+    flex-direction: column;
+  }
+  .banner {
+    height: 20%;
+    width: 80%;
   }
 }
 
-@media (max-width: 458px) {
+@media (max-width: 705px) {
   .landing {
-    border: none;
+    flex-direction: column;
+    min-height: initial
   }
 }
+

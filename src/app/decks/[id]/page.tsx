@@ -132,8 +132,8 @@ const Deck = ({ params }: { params: { id: number } }) => {
 
   return (
     <div>
-      {showComboModal && combos && (
-        <ComboListModal handleClose={setShowComboModal} combos={combos} />
+      {showComboModal && combos && deckInfo &&(
+        <ComboListModal leader={deckInfo.leader} handleClose={setShowComboModal} combos={combos} />
       )}
       {deckInfo && <DeckHeader deckInfo={deckInfo} />}
       <div className={styles.mainContent}>

@@ -31,9 +31,16 @@ const Navbar = () => {
           OPTCG OPTS <span className={styles.betaTxt}>(beta)</span>{" "}
         </Link>
       </h1>
-      {/* <Link className={styles.link} href="#" style={{ cursor: "not-allowed" }}>
-        Login
-      </Link>
+      {!user && (
+        <Link
+          className={styles.link}
+          href="/login"
+        >
+          Login
+        </Link>
+      )}
+
+      {/*
       <Link className={styles.link} href="#" style={{ cursor: "not-allowed" }}>
         My Decks
       </Link> */}

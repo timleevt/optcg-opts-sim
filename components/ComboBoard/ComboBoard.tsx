@@ -158,7 +158,8 @@ const ComboBoard = ({
           name="notes"
           id=""
           rows={1}
-          defaultValue="write more details about combo here"
+          defaultValue=""
+          placeholder="add note"
           style={{ width: "100%", marginTop: "8px" }}
         ></textarea>
         <button
