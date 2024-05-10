@@ -1,5 +1,6 @@
 import Link from "next/link";
 import styles from "./DeckListTable.module.css";
+import Card from "../Card/Card";
 
 async function getListOfDecks() {
   const url = process.env.NEXT_PUBLIC_API_BASE_URL + "deck/list";
@@ -18,9 +19,8 @@ export default async function DeckListTable() {
       <tbody>
         <tr style={{ borderBottom: "1px solid black" }}>
           <th>name</th>
-          <th>leader</th>
           <th>author</th>
-          <th>private</th>
+          <th>leader</th>
         </tr>
         {decks?.map((i: any) => {
           return (
@@ -30,9 +30,10 @@ export default async function DeckListTable() {
                   {i.name}
                 </Link>
               </td>
-              <td>{i.leader}</td>
               <td>{i.author}</td>
-              <td>{i.isPrivate === true ? <span>&#128274;</span> : ""}</td>
+              <td>
+                <Card code={i.leader} active mini />
+              </td>
             </tr>
           );
         })}

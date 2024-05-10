@@ -14,7 +14,7 @@ type Props = {
   numCopies?: number;
   active: boolean;
   mini?: boolean;
-  handleCardClick: (code: string) => void;
+  handleCardClick?: (code: string) => void;
 };
 
 const Card = ({
@@ -50,9 +50,9 @@ const Card = ({
         width={mini ? 52 : 92}
         height={mini ? 73 : 128}
         alt={code}
-        onClick={() => {
+        onClick={handleCardClick && (() => {
           handleCardClick(code);
-        }}
+        })}
         style={active ? {} : { filter: "brightness(50%)" }}
         placeholder="blur"
         blurDataURL="/images/loading.gif"

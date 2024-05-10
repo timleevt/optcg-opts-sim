@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { CardType } from "../../interface/Card";
 import retrieveDeckData from "../../src/api/Deck/retrieveDeckData";
+import styles from "./DeckData.module.css";
 
 type Props = {
   deckList: CardType[] | null;
@@ -21,7 +22,7 @@ type Stats = {
   };
   power: { [key: number]: number };
   type: { [key: string]: number };
-  keywords: { [key: string]: number};
+  keywords: { [key: string]: number };
 };
 
 export default function DeckData({ deckList }: Props) {
@@ -52,106 +53,137 @@ export default function DeckData({ deckList }: Props) {
   if (stats) {
     for (const [key, value] of Object.entries(stats.attribute)) {
       if (key.length > 0) {
-        attributes.push(
-          <p>
-            {key} : {value}
-          </p>
-        );
+        attributes.push([key, value]);
       }
     }
     for (const [key, value] of Object.entries(stats.type)) {
       if (key.length > 0) {
-        types.push(
-          <p>
-            {key} : {value}
-          </p>
-        );
+        types.push([key, value]);
       }
     }
     for (const [key, value] of Object.entries(stats.power)) {
       if (key !== "null") {
-        power.push(
-          <p>
-            {key} : {value}
-          </p>
-        );
+        power.push([key, value]);
       }
     }
     for (const [key, value] of Object.entries(stats.cost)) {
       if (key.length > 0 && key !== "null") {
-        cost.push(
-          <p>
-            {key} : {value}
-          </p>
-        );
+        cost.push([key, value]);
       }
     }
   }
 
   return (
-    <>
-    <div>re-doing the table..</div>
-    <table style={{textAlign: 'left'}}>
-      <tr>
-        <th>Counter</th>
-      </tr>
-      <tr>
-        <th>1k:</th>
-        <td>{stats.counter["c1k"]}</td>
-      </tr>
-      <tr>
-        <th>2k:</th>
-        <td>{stats.counter["c2k"]}</td>
-      </tr>
-      <tr>
-        <th>Event Counter:</th>
-        <td>TODO</td>
-      </tr>
-    </table>
-    {/* <div
-      style={{
-        display: "flex",
-        flexWrap: "wrap",
-        gap: "16px",
-        justifyContent: "space-between",
-      }}
-    >
-      <div>
-        <h2>Counter</h2>
-        <p>1k: {stats.counter["c1k"]}</p>
-        <p>2k: {stats.counter["c2k"]}</p>
-      </div>
-      <div>
-        <h2>Keyword</h2>
-        <p>Trigger: {stats.keywords.Trigger || 0}</p>
-        <p>Blocker: {stats.keywords.Blocker || 0}</p>
-        <p>Banish: {stats.keywords.Banish || 0}</p>
-        <p>Rush: {stats.keywords.Rush || 0}</p>
-        <p>Double Attack: {stats.keywords.DoubleAttack || 0}</p>
-      </div>
-      <div>
-        <h2>Card Type</h2>
-        <p>Char: {stats.cardType["character"]}</p>
-        <p>Event: {stats.cardType["event"]}</p>
-        <p>Stage: {stats.cardType["stage"]}</p>
-      </div>
-      <div>
-        <h2>Attribute</h2>
-        {attributes}
-      </div>
-      <div>
-        <h2>Type</h2>
-        {types}
-      </div>
-      <div>
-        <h2>Power</h2>
-        {power}
-      </div>
-      <div>
-        <h2>Cost</h2>
-        {cost}
-      </div>
-    </div> */}
-    </>
+    <div className={styles.container}>
+      <table style={{ textAlign: "left", backgroundColor: "#e0f2fe" }}>
+        <tbody>
+          <tr>
+            <th>Counter</th>
+          </tr>
+          <tr>
+            <td>1k:</td>
+            <td>{stats.counter["c1k"]}</td>
+          </tr>
+          <tr>
+            <td>2k:</td>
+            <td>{stats.counter["c2k"]}</td>
+          </tr>
+          <tr>
+            <td>Event Counter:</td>
+            <td>{stats.counter["event"]}</td>
+          </tr>
+          <tr>
+            <th>Keywords</th>
+          </tr>
+          <tr>
+            <td>Trigger:</td>
+            <td>{stats.keywords.Trigger || 0}</td>
+          </tr>
+          <tr>
+            <td>Blocker:</td>
+            <td>{stats.keywords.Blocker || 0}</td>
+          </tr>
+          <tr>
+            <td>Rush:</td>
+            <td>{stats.keywords.Rush || 0}</td>
+          </tr>
+          <tr>
+            <td>Banish:</td>
+            <td>{stats.keywords.Banish || 0}</td>
+          </tr>
+          <tr>
+            <td>Double Attack:</td>
+            <td>{stats.keywords.DoubleAttack || 0}</td>
+          </tr>
+          <tr>
+            <th>Card Type</th>
+          </tr>
+          <tr>
+            <td>Character:</td>
+            <td>{stats.cardType["character"] || 0}</td>
+          </tr>
+          <tr>
+            <td>Event:</td>
+            <td>{stats.cardType["event"] || 0}</td>
+          </tr>
+          <tr>
+            <td>Stage:</td>
+            <td>{stats.cardType["stage"] || 0}</td>
+          </tr>
+        </tbody>
+      </table>
+      <table style={{ textAlign: "left" }}>
+        <tbody>
+          <tr>
+            <th>Attribute</th>
+          </tr>
+          {attributes.map((i, index) => {
+            return (
+              <tr key={index}>
+                <td>{i[0]}:</td>
+                <td>{i[1]}</td>
+              </tr>
+            );
+          })}
+          <tr>
+            <th>Types</th>
+          </tr>
+          {types.map((i, index) => {
+            return (
+              <tr key={index}>
+                <td>{i[0]}:</td>
+                <td>{i[1]}</td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+      <table style={{ textAlign: "left", backgroundColor: "#e0f2fe" }}>
+        <tbody>
+          <tr>
+            <th>Power</th>
+          </tr>
+          {power.map((i, index) => {
+            return (
+              <tr key={index}>
+                <td>{i[0]}:</td>
+                <td>{i[1]}</td>
+              </tr>
+            );
+          })}
+          <tr>
+            <th>Cost</th>
+          </tr>
+          {cost.map((i, index) => {
+            return (
+              <tr key={index}>
+                <td>{i[0]}:</td>
+                <td>{i[1]}</td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+    </div>
   );
 }

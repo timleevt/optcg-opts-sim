@@ -15,7 +15,6 @@ const Build = () => {
   }
   return (
     <div>
-      <div>adding a deck without logging in may crash the server atm..</div>
       <DeckLoader setDeck={setDeck} />
     </div>
   );

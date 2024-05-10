@@ -11,10 +11,10 @@
   gap: 8px;
 }
 
-.newsItem {
-  width: 95%;
+.newsItemContainer {
+  width: 70%;
   margin: auto;
-  margin-bottom: 16px;
+  margin-bottom: 50px;
 }
 
 @media (max-width: 705px) {
@@ -34,4 +34,3 @@
     min-height: initial
   }
 }
-

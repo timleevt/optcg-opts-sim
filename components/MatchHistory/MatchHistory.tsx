@@ -35,20 +35,23 @@ const MatchHistory = ({ deckId, leaders, matchHistory }: Props) => {
       </button>
       <hr style={{ width: "100%" }} />
       <div className={styles.matchesContainer}>
-      {matchHistory.map((i) => {
-        return (
-          <div
-            key={i.id}
-            className={styles.matchHistoryContainer}
-            style={i.result === "L" ? { backgroundColor: "#ffe4e6" } : {}}
-          >
-            <span>VS.</span>{" "}
-            <Card code={i.leader} mini active handleCardClick={() => {}} />
-            <span>&#9861; {i.diceResult}</span>
-            <span>Turn: {i.turnOrder === 1 ? 'First' : 'Second'}</span>
-          </div>
-        );
-      })}
+        {matchHistory.map((i) => {
+          return (
+            <div
+              key={i.id}
+              className={styles.matchHistoryContainer}
+              style={i.result === "L" ? { backgroundColor: "#ffe4e6" } : {}}
+            >
+              <span className={styles.eventName}>{i.eventName}</span>
+              <div className={styles.matchInfo}>
+                <span>VS.</span>{" "}
+                <Card code={i.leader} mini active handleCardClick={() => {}} />
+                <span>&#9861; {i.diceResult}</span>
+                <span>Turn: {i.turnOrder === 1 ? "First" : "Second"}</span>
+              </div>
+            </div>
+          );
+        })}
       </div>
       {showRecordModal && (
         <RecordMatchModal
