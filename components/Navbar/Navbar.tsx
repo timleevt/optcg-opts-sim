@@ -28,7 +28,7 @@ const Navbar = () => {
     <nav className={styles.container}>
       <h1>
         <Link href="/">
-          OPTCG OPTS <span className={styles.betaTxt}>(beta)</span>{" "}
+          OPTCG OPTS
         </Link>
       </h1>
       {!user && (
@@ -51,9 +51,17 @@ const Navbar = () => {
         Build
       </Link>
       {user && (
+        <>
+        {/* <Link className={styles.link} href="/profile">
+          Profile
+        </Link> */}
+        <Link className={styles.link} href="/matches">
+          Matches
+        </Link>
         <button className={styles.logoutBtn} onClick={handleLogout}>
           Logout
         </button>
+        </>
       )}
     </nav>
   );

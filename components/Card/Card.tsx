@@ -14,6 +14,7 @@ type Props = {
   numCopies?: number;
   active: boolean;
   mini?: boolean;
+  extraSmall?: boolean;
   handleCardClick?: (code: string) => void;
 };
 
@@ -29,10 +30,16 @@ const Card = ({
   //   effect,
   active,
   mini,
+  extraSmall,
   numCopies,
   handleCardClick,
 }: Props) => {
   const set = code.split("-")[0];
+  const size = {
+    width: mini ? 52 : (extraSmall ? 26 : 92),
+    height: mini ? 73 : (extraSmall ? 37 : 128)
+  };
+  
   return (
     // TODO: figure out placeholder loader for Image
     <div className={styles.container}>
@@ -42,17 +49,18 @@ const Card = ({
         //   code +
         //   ".png?240202"
         // }
-        src={
-          `/images/cards/${set}/` +
-          code +
-          ".jpg"
-        }
-        width={mini ? 52 : 92}
-        height={mini ? 73 : 128}
+        src={`/images/cards/${set}/` + code + ".jpg"}
+        // width={mini ? 52 : 92}
+        // height={mini ? 73 : 128}
+        width={size.width}
+        height={size.height}
         alt={code}
-        onClick={handleCardClick && (() => {
-          handleCardClick(code);
-        })}
+        onClick={
+          handleCardClick &&
+          (() => {
+            handleCardClick(code);
+          })
+        }
         style={active ? {} : { filter: "brightness(50%)" }}
         placeholder="blur"
         blurDataURL="/images/loading.gif"

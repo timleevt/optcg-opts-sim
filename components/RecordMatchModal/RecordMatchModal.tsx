@@ -1,69 +1,67 @@
-import { useMemo, useState } from "react";
-import { useForm } from "react-hook-form";
-import * as yup from "yup";
+import { useState } from "react";
 import { CardType } from "../../interface/Card";
 import styles from "./RecordMatchModal.module.css";
 import postMatchResult from "../../src/api/Deck/postMatchResult";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+type DeckData = {
+  name: string;
+  leader: string;
+  id: number;
+};
 
 type Props = {
-  deckId: number;
+  userId: string;
   handleClose: (show: boolean) => void;
-  leaders: CardType[] | null;
+  leaders: CardType[];
+  decks: DeckData[];
 };
-const RecordMatchModal = ({ deckId, leaders, handleClose }: Props) => {
-  const [diceChecked, setDiceChecked] = useState(false);
-  const [resultChecked, setResultChecked] = useState(false);
-  const [turnChecked, setTurnChecked] = useState(false);
-  const [showSubmitted, setShowSubmitted] = useState(false);
-  const { register, handleSubmit } = useForm<MatchFormData>();
+const RecordMatchModal = ({ userId, leaders, handleClose, decks }: Props) => {
+  const [diceResult, setDiceResult] = useState("W");
+  const [turnOrder, setTurnOrder] = useState("1st");
+  const [matchResult, setMatchResult] = useState("W");
+  const [eventName, setEventName] = useState("");
+  const [myDeck, setMyDeck] = useState(decks[0].id);
+  const [oppDeck, setOppDeck] = useState(leaders[0].code);
 
-  const showSubmitPopup = () => {
-    setShowSubmitted(true);
-    setTimeout(() => {
-      setShowSubmitted(false);
-    }, 3000);
-    return;
-  };
+  if (!leaders || !decks || !userId) {
+    return <div>Something went wrong</div>;
+  }
 
-  const onSubmit = async (data: MatchFormData) => {
-    console.log(data.turn);
-    const req = {
-      deckId: deckId,
-      leader: data.leader,
-      event: data.event || "",
-      turn: data.turn ? 1 : 2,
-      dice: data.dice ? "W" : "L",
-      result: data.result ? "W" : "L",
+  const handleSubmit = async () => {
+    const reqData = {
+      userId,
+      deckId: myDeck,
+      leader: oppDeck,
+      event: eventName,
+      turn: turnOrder === "1st" ? 1 : 2,
+      dice: diceResult,
+      result: matchResult,
     };
     try {
-      await postMatchResult(req);
-      showSubmitPopup();
+      toast("🦄 Wow so easy!", {
+        autoClose: 2000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+      });
+      await postMatchResult(reqData);
     } catch (e) {
+      toast.error("Something went wrong", {
+        autoClose: 2000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+      });
       console.log(e);
     }
     return;
   };
 
-  const schema = useMemo(
-    () =>
-      yup.object().shape({
-        leader: yup.string().required(),
-        event: yup.number().nullable(),
-        turn: yup.boolean(),
-        dice: yup.boolean(),
-        result: yup.boolean(),
-      }),
-    []
-  );
-
-  type MatchFormData = yup.InferType<typeof schema>;
-
-  if (!leaders) {
-    return <div>Loading...</div>;
-  }
-
   return (
     <div>
+      <ToastContainer />
       <div
         className={styles.modalBackground}
         onClick={() => handleClose(false)}
@@ -75,99 +73,79 @@ const RecordMatchModal = ({ deckId, leaders, handleClose }: Props) => {
           <span className={styles.close} onClick={() => handleClose(false)}>
             &times;
           </span>
-          <div style={{ marginTop: "30px" }}>
-            {showSubmitted && <div>Submitted!</div>}
-            <form
-              style={{ display: "flex", flexDirection: "column", gap: "12px" }}
-              onSubmit={handleSubmit(onSubmit)}
+
+          <div className={styles.formContainer}>
+            <label htmlFor="mydeck">My Deck</label>
+            <select
+              name="mydeck"
+              id="mydeck"
+              onChange={(e) => setMyDeck(parseInt(e.target.value))}
             >
-              <label htmlFor="leader">vs.</label>
-              <select
-                {...register("leader")}
-                style={{ height: "40px" }}
-                name="leader"
-                id="leader"
+              {decks.map((i, index) => {
+                return (
+                  <option
+                    key={index}
+                    value={i.id}
+                  >{`[${i.leader}] ${i.name}`}</option>
+                );
+              })}
+            </select>
+            <label htmlFor="oppdeck">Opponent Leader</label>
+            <select
+              name="oppdeck"
+              id="oppdeck"
+              defaultValue={leaders[0].code}
+              onChange={(e) => setOppDeck(e.target.value)}
+            >
+              {leaders.map((i) => {
+                return (
+                  <option key={i.code} value={i.code}>{`[${i.code}] ${
+                    i.name
+                  } [${i.colors.join("/")}]`}</option>
+                );
+              })}
+            </select>
+            <label htmlFor="eventName">Event Name</label>
+            <input
+              type="text"
+              name="eventName"
+              id="eventName"
+              placeholder="Event Name (Optional)"
+              onChange={(e) => setEventName(e.target.value)}
+            />
+            <div className={styles.resultContainer}>
+              <span>Dice Roll</span>
+              <button
+                className={
+                  diceResult === "W" ? styles.winButton : styles.lossButton
+                }
+                onClick={() => setDiceResult(diceResult === "W" ? "L" : "W")}
               >
-                {leaders.map((i) => {
-                  return (
-                    <option key={i.code} value={i.code}>{`${i.code} ${
-                      i.name
-                    } [${i.colors.join("/")}]`}</option>
-                  );
-                })}
-              </select>
-              <div style={{ display: "flex", flexDirection: "column" }}>
-                <label htmlFor="event">Event Name(optional):</label>
-                <input
-                  {...register("event")}
-                  type="text"
-                  name="event"
-                  id="event"
-                />
-              </div>
-              <div style={{ display: "flex", justifyContent: "space-between" }}>
-                <h2>Turn</h2>
-                <label className={styles.switch}>
-                  <input
-                    {...register("turn")}
-                    type="checkbox"
-                    id="turn"
-                    name="turn"
-                    value={turnChecked ? 1 : 2}
-                    onChange={() => setTurnChecked(!turnChecked)}
-                  />
-                  <span className={styles.turnSlider}>
-                    {turnChecked ? "1st" : "2nd"}
-                  </span>
-                </label>
-              </div>
-              <div style={{ display: "flex", justifyContent: "space-between" }}>
-                <h2>Dice Roll</h2>
-                <label className={styles.switch}>
-                  <input
-                    {...register("dice")}
-                    type="checkbox"
-                    id="dice"
-                    name="dice"
-                    value={resultChecked ? "W" : "L"}
-                    onChange={() => {
-                      setDiceChecked(!diceChecked);
-                    }}
-                  />
-                  <span className={styles.slider}>
-                    {diceChecked ? "W" : "L"}
-                  </span>
-                </label>
-              </div>
-              <div style={{ display: "flex", justifyContent: "space-between" }}>
-                <h2>Result</h2>
-                <label className={styles.switch}>
-                  <input
-                    {...register("result")}
-                    type="checkbox"
-                    id="result"
-                    name="result"
-                    value={resultChecked ? "W" : "L"}
-                    onChange={() => {
-                      setResultChecked(!resultChecked);
-                    }}
-                  />
-                  <span className={styles.slider}>
-                    {resultChecked ? "W" : "L"}
-                  </span>
-                </label>
-              </div>
-              <button value="Submit" className={styles.btn}>
-                Submit
+                {diceResult}
               </button>
-            </form>
-            <div
-              className={
-                showSubmitted ? styles.submitPopup : styles.submitPopupHidden
-              }
-            >
-              Match Submitted!
             </div>
+            <div className={styles.resultContainer}>
+              <span>Turn Order</span>
+              <button
+                onClick={() =>
+                  setTurnOrder(turnOrder === "1st" ? "2nd" : "1st")
+                }
+              >
+                {turnOrder}
+              </button>
+            </div>
+            <div className={styles.resultContainer}>
+              <span>Result</span>
+              <button
+                className={
+                  matchResult === "W" ? styles.winButton : styles.lossButton
+                }
+                onClick={() => setMatchResult(matchResult === "W" ? "L" : "W")}
+              >
+                {matchResult}
+              </button>
+            </div>
+            <button onClick={handleSubmit}>Submit</button>
           </div>
         </div>
       </div>

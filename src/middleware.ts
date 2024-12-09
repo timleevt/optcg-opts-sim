@@ -5,7 +5,7 @@ export function middleware(request: NextRequest) {
   const path = request.nextUrl.pathname;
 
   const isPublicPath = path === "/login";
-  const privatePathBuild = path === "/build";
+  // const privatePathBuild = path === "/build";
 
   const token = request.cookies.get("token")?.value || "";
 
@@ -18,9 +18,9 @@ export function middleware(request: NextRequest) {
   // }
 
   // temporary stop gap
-  if (privatePathBuild && !token) {
-    return NextResponse.redirect(new URL("/", request.nextUrl));
-  }
+  // if (privatePathBuild && !token) {
+  //   return NextResponse.redirect(new URL("/", request.nextUrl));
+  // }
 }
 
 // See "Matching Paths" below to learn more

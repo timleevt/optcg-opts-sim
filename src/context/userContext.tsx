@@ -5,23 +5,24 @@ import { createContext, useContext, useEffect, useState } from "react";
 
 export const UserContext = createContext<UserContext>({} as UserContext);
 // export const UserContext = createContext({});
+type User = {
+  username: string;
+  id: string;
+};
 type UserContext = {
-  user: string | null;
-  setUser: (user: string) => void;
+  // user: string | null;
+  user: User | null;
+  setUser: (user: User) => void;
+  // setUser: (user: string) => void;
   logout: () => void;
 };
-
-// type user = {
-//   username: string;
-//   id: string;
-// }
 
 export function UserContextProvider({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const [user, setUser] = useState<string | null>(null);
+  const [user, setUser] = useState<User | null>(null);
   const url = process.env.NEXT_PUBLIC_API_BASE_URL + `auth/profile`;
 
   const logout = () => {
@@ -33,7 +34,8 @@ export function UserContextProvider({
       axios
         .get(url, { withCredentials: true })
         .then(({ data }) => {
-          setUser(data.username);
+          // setUser(data.username);
+          setUser(data);
         })
         .catch((error) => {});
     }

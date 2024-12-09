@@ -20,9 +20,6 @@
   padding: 20px;
   border-radius: 5px;
   max-width: 40%;
-  max-height: 50svh;
-  height: 80svh;
-  overflow: scroll;
 }
 
 .close {
@@ -32,107 +29,39 @@
   cursor: pointer;
 }
 
-.switch {
-  position: relative;
-  display: inline-block;
-  width: 60px;
-  height: 34px;
-  margin: auto 0px;
-}
-
-.switch input {
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
-
-.turnSlider {
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #e0e7ff;
-  border-radius: 12px;
-  display: block;
-  text-align: center;
-  margin: auto 0px;
-  align-content: center;
-}
-
-.slider {
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #ffe4e6;
-  -webkit-transition: 0.4s;
-  transition: 0.4s;
-  border-radius: 12px;
-  display: block;
-  text-align: center;
-  margin: auto 0px;
-  align-content: center;
-}
-
-.slider:before {
-  position: absolute;
-  content: "";
-  height: 26px;
-  width: 26px;
-  left: 4px;
-  bottom: 4px;
-  -webkit-transition: 0.4s;
-  transition: 0.4s;
-  border-radius: 50%;
-}
-
-input:checked + .slider {
-  background-color: #dcfce7;
-}
-
-input:checked + .slider:before {
-  -webkit-transform: translateX(26px);
-  -ms-transform: translateX(26px);
-  transform: translateX(26px);
-}
-
-.inputText {
-  display: block;
-  text-align: center;
-  margin: auto 0px;
-  align-content: center;
-}
-
-.btn {
-  display: block;
-  width: 60%;
+.formContainer {
+  padding-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 80%;
   margin: 0px auto;
 }
 
-.submitPopup {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  padding: 10px;
-  border-radius: 12px;
-  z-index: 2;
-  border: 1px solid rgb(72, 199, 142);
-  background-color: rgb(72, 199, 142);
-  color: white;
-  visibility: visible;
-  opacity: 1;
-  transition: opacity 1s linear;
+.resultContainer {
+  display: flex;
+  justify-content: space-between;
+  margin: 0px auto;
+  width: 100%;
 }
 
-.submitPopupHidden {
-  visibility: hidden;
-  opacity: 0;
-  transition: visibility 0s 2s, opacity 2s linear;
+.resultContainer > button {
+  width: 80px;
 }
+
+.winButton {
+  background-color: #86efac;
+}
+
+.lossButton {
+  background-color: #fca5a5;
+}
+
+.lossButton:hover {
+  color: #dc2626;
+  bordeR: 1px solid #dc2626;
+}
+
 
 @media (max-width: 986px) {
   .modalContent {

@@ -1,5 +1,5 @@
-const getMatchHistory = async (deckId: number): Promise<any> => {
-  const url = process.env.NEXT_PUBLIC_API_BASE_URL + `deck/matches/${deckId}`;
+const getMatchHistory = async (userId: string): Promise<any> => {
+  const url = process.env.NEXT_PUBLIC_API_BASE_URL + `deck/matches/${userId}`;
 
   try {
     let res = await fetch(url, {

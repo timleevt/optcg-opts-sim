@@ -10,13 +10,6 @@
   flex-basis: 90%;
 }
 
-.betaTxt {
-  position: relative;
-  font-size: 16px;
-  left: -110px;
-  top: 20px;
-}
-
 .link {
   margin: auto 16px;
   text-wrap: nowrap;

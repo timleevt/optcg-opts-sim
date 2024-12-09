@@ -152,16 +152,6 @@ const Deck = ({ params }: { params: { id: number } }) => {
             handleComboModal={handleComboModal}
           />
           {content === "data" && <DeckData deckList={deckList} />}
-          {content === "matchup" && (
-            <Matchup matchHistory={matchHistory} leaders={leaders} />
-          )}
-          {content === "track" && deckInfo && (
-            <MatchHistory
-              matchHistory={matchHistory}
-              deckId={deckInfo.id}
-              leaders={leaders}
-            />
-          )}
           {content === "combo" && (
             <ComboArea
               leader={deckInfo?.leader}

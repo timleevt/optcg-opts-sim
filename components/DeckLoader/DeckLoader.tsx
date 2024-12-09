@@ -35,7 +35,7 @@ const DeckLoader = ({ setDeck }: Props) => {
       return;
     }
     try {
-      await submitDeckList({ ...data, author: user }).then((response) => {
+      await submitDeckList({ ...data, author: user.username }).then((response) => {
         if (response.ok) {
           router.push("/decks");
         }
@@ -56,7 +56,7 @@ const DeckLoader = ({ setDeck }: Props) => {
           type="text"
           name="deckname"
           id="deckname"
-          placeholder={`${user}'s deck`}
+          placeholder={`${user?.username}'s deck`}
         />
         <textarea
           {...register("decklist", { required: true })}
