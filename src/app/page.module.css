@@ -1,28 +1,6 @@
-.landing {
-  display: flex;
-  align-items: center;
-  margin: auto;
-  position: relative;
-  width: 90%;
-  border: 2px solid black;
-  justify-content: center;
-  gap: 8px;
-}
-
 @media (max-width: 705px) {
-
-  .landing {
-    flex-direction: column;
-  }
   .banner {
     height: 20%;
     width: 80%;
-  }
-}
-
-@media (max-width: 705px) {
-  .landing {
-    flex-direction: column;
-    min-height: initial
   }
 }

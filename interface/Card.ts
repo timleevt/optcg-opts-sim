@@ -10,5 +10,5 @@ export type CardType = {
   colors: string[];
   effect: string | null;
   trigger: string | null;
-  copies: number;
+  copies: number | null;
 };

@@ -31,13 +31,18 @@ const DeckLoader = ({ setDeck }: Props) => {
   type Data = yup.InferType<typeof schema>;
 
   const onSubmit = async (data: Data) => {
-    if (!user) {
-      return;
-    }
+    // if (!user) {
+    //   return;
+    // }
+
     try {
-      await submitDeckList({ ...data, author: user.username }).then((response) => {
+      // await submitDeckList({ ...data, author: user.username }).then((response) => {
+      console.log("here?");
+      await submitDeckList({ ...data, author: "jank" }).then((response) => {
         if (response.ok) {
           router.push("/decks");
+        } else {
+          console.log(response);
         }
       });
     } catch (error) {

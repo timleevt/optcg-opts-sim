@@ -1,12 +1,31 @@
-.leaderContainer {
-    display: flex;
-    gap: 10px;
-    width: 50%;
-    margin: auto;
-    /* border: 1px solid black; */
-    justify-content: space-between;
+.deckTable {
+  width: 100%;
+  text-align: left;
+  max-width: 700px;
+  margin: auto;
+  margin-top: 16px;
+  border-collapse: collapse;
 }
 
-.leaderText{
-    margin: auto 0px;
+.tableItem {
+  height: 70px;
+}
+
+.tableItem:hover {
+  background-color: #f2f4f5;
+}
+
+.rowLink:hover {
+  color: black;
+}
+
+.rowLink::before {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 100%;
+  max-width: 800px;
+  height: 55px;
+  margin: auto;
+  margin-top: -16px;
 }

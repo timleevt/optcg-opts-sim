@@ -31,25 +31,25 @@ const Navbar = () => {
           OPTCG OPTS
         </Link>
       </h1>
-      {!user && (
+      {/* {!user && (
         <Link
           className={styles.link}
           href="/login"
         >
           Login
         </Link>
-      )}
+      )} */}
 
       {/*
       <Link className={styles.link} href="#" style={{ cursor: "not-allowed" }}>
         My Decks
       </Link> */}
-      <Link className={styles.link} href="/decks">
+      {/* <Link className={styles.link} href="/decks">
         Decks
       </Link>
       <Link className={styles.link} href="/build">
         Build
-      </Link>
+      </Link> */}
       {user && (
         <>
         {/* <Link className={styles.link} href="/profile">
