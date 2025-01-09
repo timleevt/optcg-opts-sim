@@ -9,11 +9,14 @@ import DeckData from "../../../../components/DeckData/DeckData";
 import getDeckListById from "@/api/Deck/getDeckListById";
 import { CardType } from "../../../../interface/Card";
 import ComboListModal from "../../../../components/ComboListModal/ComboListModal";
+import ComboBoard from "../../../../components/ComboBoard/ComboBoard";
+import ComboBoardModal from "../../../../components/ComboBoardModal/ComboBoardModal";
 
 const Leader = ({ params }: { params: { code: string } }) => {
   const [deck, setDeck] = useState<RegisteredDeck[]>([]);
   const [selectedDeckId, setselectedDeckId] = useState<string>("");
   const [selectedDeckInfo, setSelectedDeckInfo] = useState<CardType[]>([]);
+  const [showComboBoard, setShowComboBoard] = useState(false); // temporarily set to true
   const [showComboModal, setShowComboModal] = useState(false);
 
   useEffect(() => {
@@ -46,6 +49,12 @@ const Leader = ({ params }: { params: { code: string } }) => {
 
   return (
     <div>
+      {
+        showComboBoard && (
+          // <ComboBoard />
+          <ComboBoardModal cards={selectedDeckInfo}/>
+        )
+      }
       {showComboModal && (
         <ComboListModal
           leader={params.code}
@@ -79,7 +88,7 @@ const Leader = ({ params }: { params: { code: string } }) => {
               );
             })}
           </select>
-          <button>Combo Board</button>
+          <button onClick={() => setShowComboBoard(true)}>Combo Board</button>
           <button onClick={() => setShowComboModal(true)}>Options</button>
         </div>
       </div>
@@ -91,7 +100,7 @@ const Leader = ({ params }: { params: { code: string } }) => {
         )}
         {selectedDeckInfo && (
           <>
-            <DeckData deckList={selectedDeckInfo} />
+            
             <ul>
               {selectedDeckInfo?.map((i) => {
                 return (
@@ -101,6 +110,7 @@ const Leader = ({ params }: { params: { code: string } }) => {
                 );
               })}
             </ul>
+            <DeckData deckList={selectedDeckInfo} />
           </>
         )}
       </div>
