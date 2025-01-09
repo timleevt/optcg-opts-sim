@@ -1,5 +1,5 @@
 const retrieveDeckData = async (req: any): Promise<any> => {
-    const url = process.env.NEXT_PUBLIC_API_BASE_URL + "deck/data";
+    const url = process.env.NEXT_PUBLIC_API_BASE_URL + "v1/deck/data";
     try {
       let res = await fetch(url, {
         method: "POST",

@@ -4,7 +4,7 @@ import retrieveDeckData from "../../src/api/Deck/retrieveDeckData";
 import styles from "./DeckData.module.css";
 
 type Props = {
-  deckList: CardType[] | string | null;
+  deckList: CardType[];
 };
 
 type Stats = {
@@ -27,27 +27,26 @@ type Stats = {
 
 export default function DeckData({ deckList }: Props) {
   const [stats, setStats] = useState<Stats | null>(null);
-  // useEffect(() => {
-  //   if (deckList) {
-  //     retrieveDeckData(deckList)
-  //       .then((response) => {
-  //         if (!response.ok) {
-  //           throw new Error("Network response was not ok");
-  //         }
-  //         return response.json();
-  //       })
-  //       .then((data) => {
-  //         setStats(data);
-  //       });
-  //   }
-  // }, [deckList]);
+  useEffect(() => {
+    if (deckList) {
+      retrieveDeckData(deckList)
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Network response was not ok");
+          }
+          return response.json();
+        })
+        .then((data) => {
+          setStats(data);
+        });
+    }
+  }, [deckList]);
 
-  if (typeof deckList === 'string') {
-    
-    return <div>hello world</div>
+  if (!deckList || deckList.length == 0) {
+    return;
   }
-  if (!deckList || !stats) {
-    return <div>Loading... {typeof deckList}</div>;
+  if (!stats) {
+    return <div>Loading... </div>;
   }
 
   const attributes = [];

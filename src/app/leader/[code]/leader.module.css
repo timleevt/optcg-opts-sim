@@ -5,14 +5,18 @@
     margin-bottom: 16px;
   }
   
-  .textArea {
+  .txtArea {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
   }
   
   .txtArea > h2 {
     text-align: center;
+  }
+
+  .txtArea > button {
+    width: 100%;
   }
 

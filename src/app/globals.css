@@ -8,16 +8,16 @@ a:hover {
 }
 
 button {
-  border-radius: 16px;
-  border: 1px solid transparent;
-  color: white;
-  background-color: cadetblue;
+  /* border-radius: 16px; */
+  border: 1px solid cadetblue;
+  color: cadetblue;
+  background-color: white;
   padding: 12px;
 }
 
 button:hover {
   cursor: pointer;
-  background-color: white;
-  color: cadetblue;
+  background-color: cadetblue;
+  color: white;
   border: 1px solid cadetblue;
 }
