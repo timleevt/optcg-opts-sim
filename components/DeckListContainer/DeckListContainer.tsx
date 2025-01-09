@@ -1,39 +1,34 @@
+"use client";
+import { useEffect, useState } from "react";
 import { CardType } from "../../interface/Card";
 import Card from "../Card/Card";
 import styles from "./DeckListContainer.module.css";
+import getDeckListById from "@/api/Deck/getDeckListById";
 
 type Props = {
-  deck: CardType[] | null; // take off null later
-  handleCardClick: (code: string) => void;
-  numDon: number;
-  content: string;
+  deckId: string;
 };
 
-const DeckListContainer = ({
-  deck,
-  handleCardClick,
-  numDon,
-  content,
-}: Props) => {
-  if(!deck) {
-    return <div>Loading...</div>
-  }
+const DeckListContainer = ({ deckId }: Props) => {
+  const [deck, setDeck] = useState<CardType[]>([]);
+
+  useEffect(() => {
+    const fetchDeck = async () => {
+      try {
+        const data = await getDeckListById(parseInt(deckId));
+        setDeck(data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchDeck();
+  }, [deckId]);
+
   return (
     <div className={styles.container}>
       {deck?.map((i) => {
-        if (i.cardType === "Leader") { return; }
         return (
-          <Card
-            key={i.code}
-            cardType={i.cardType}
-            code={i.code}
-            active={
-              content !== "combo" ||
-              (content === "combo" && i.cost != null && numDon >= i.cost)
-            }
-            numCopies={i.copies}
-            handleCardClick={handleCardClick}
-          />
+          <Card key={i.code} code={i.code} active numCopies={i.copies || 0} />
         );
       })}
     </div>
