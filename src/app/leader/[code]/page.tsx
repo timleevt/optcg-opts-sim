@@ -88,12 +88,12 @@ const Leader = ({ params }: { params: { code: string } }) => {
         </div>
       </div>
       <div className={styles.container}>
-        {selectedDeckId && (
+        {(selectedDeckId && selectedDeckId !== "") && (
           <>
             <DeckListContainer deckId={selectedDeckId} />
           </>
         )}
-        {selectedDeckInfo && (
+        {(selectedDeckInfo && selectedDeckId !== "") && (
           <>
             <ul>
               {selectedDeckInfo?.map((i) => {
