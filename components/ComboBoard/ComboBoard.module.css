@@ -24,6 +24,7 @@
   padding: 10px;
   flex-wrap: wrap;
   overflow: scroll;
+  height: 200px;
 }
 
 .submitPopup {

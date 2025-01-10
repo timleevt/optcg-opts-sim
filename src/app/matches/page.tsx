@@ -1,3 +1,4 @@
+// DEPRECATED PAGE
 "use client";
 
 import getLeaders from "@/api/Deck/getLeaders";

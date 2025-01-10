@@ -1,3 +1,4 @@
+// DEPRECATED PAGE
 "use client";
 import { useState } from "react";
 import DeckLoader from "../../../components/DeckLoader/DeckLoader";

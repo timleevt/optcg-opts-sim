@@ -1,3 +1,4 @@
+// DEPRECATED PAGE
 "use client";
 
 import getDeckInfo from "../../../api/Deck/getDeckInfo";

@@ -1,3 +1,4 @@
+// DEPRECATED PAGE
 "use client";
 
 import { useRouter } from "next/navigation";

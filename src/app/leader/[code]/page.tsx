@@ -49,12 +49,7 @@ const Leader = ({ params }: { params: { code: string } }) => {
 
   return (
     <div>
-      {
-        showComboBoard && (
-          // <ComboBoard />
-          <ComboBoardModal cards={selectedDeckInfo}/>
-        )
-      }
+      {showComboBoard && <ComboBoardModal cards={selectedDeckInfo} handleClose={setShowComboBoard}/>}
       {showComboModal && (
         <ComboListModal
           leader={params.code}
@@ -100,7 +95,6 @@ const Leader = ({ params }: { params: { code: string } }) => {
         )}
         {selectedDeckInfo && (
           <>
-            
             <ul>
               {selectedDeckInfo?.map((i) => {
                 return (

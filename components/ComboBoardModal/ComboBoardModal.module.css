@@ -16,33 +16,21 @@
   background-color: white;
   padding: 30px;
   border-radius: 5px;
-  max-width: 95%;
+  max-width: 80%;
   max-height: 80svh;
   height: 80svh;
-}
-
-.btnContainer {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-  padding: 8px;
+  overflow-y: scroll;
 }
 
 .cardContainer {
   display: flex;
-  max-width: 70%;
   flex-wrap: wrap;
-  margin: 0px auto;
+  align-content:baseline;
+  gap: 2px;
+  padding:
 }
 
-.comboContainer {
+
+.container {
   display: flex;
-  border: 2px solid pink;
-  border-radius: 12px;
-  max-height: 81px;
-  min-height: 81px;
-  gap: 16px;
-  padding: 10px;
-  flex-wrap: wrap;
-  overflow: scroll;
 }
