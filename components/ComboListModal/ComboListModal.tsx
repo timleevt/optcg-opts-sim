@@ -1,14 +1,14 @@
 "use client";
 import { useState } from "react";
 import styles from "./ComboListModal.module.css";
-import { ComboType } from "../../interface/Combo";
+import { Combo } from "../../interface/Combo";
 import Action from "../Action/Action";
 import Card from "../Card/Card";
 
 type Props = {
   leader: string;
   handleClose: (show: boolean) => void;
-  combos: ComboType[];
+  combos: Combo[];
 };
 const ComboListModal = ({ leader, handleClose, combos }: Props) => {
   const [curve, setCurve] = useState(1);

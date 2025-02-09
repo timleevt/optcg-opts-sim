@@ -68,6 +68,7 @@ const ComboBoard = ({
     const end = calculateEndCurve();
     const req = {
       deckId: deckId,
+      leader: leader,
       startCurve: numDon,
       endCurve: end,
       currBoard: currBoard,

@@ -9,8 +9,9 @@ import DeckData from "../../../../components/DeckData/DeckData";
 import getDeckListById from "@/api/Deck/getDeckListById";
 import { CardType } from "../../../../interface/Card";
 import ComboListModal from "../../../../components/ComboListModal/ComboListModal";
-import ComboBoard from "../../../../components/ComboBoard/ComboBoard";
 import ComboBoardModal from "../../../../components/ComboBoardModal/ComboBoardModal";
+import getCombosByLeader from "@/api/Deck/getCombosByLeader";
+import { Combo } from "../../../../interface/Combo";
 
 const Leader = ({ params }: { params: { code: string } }) => {
   const [deck, setDeck] = useState<RegisteredDeck[]>([]);
@@ -18,6 +19,7 @@ const Leader = ({ params }: { params: { code: string } }) => {
   const [selectedDeckInfo, setSelectedDeckInfo] = useState<CardType[]>([]);
   const [showComboBoard, setShowComboBoard] = useState(false); // temporarily set to true
   const [showComboModal, setShowComboModal] = useState(false);
+  const [combos, setCombos] = useState<Combo[]>([]);
 
   useEffect(() => {
     const fetchDecks = async () => {
@@ -47,16 +49,34 @@ const Leader = ({ params }: { params: { code: string } }) => {
     fetchDeck();
   }, [selectedDeckId]);
 
+  // TODO GET Combos
+  useEffect(() => {
+    const fetchCombos = async () => {
+      try {
+        const res = await getCombosByLeader(params.code);
+        setCombos(res);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchCombos();
+  }, [params.code]);
+
   return (
     <div>
-      {showComboBoard && <ComboBoardModal cards={selectedDeckInfo} handleClose={setShowComboBoard}/>}
+      {showComboBoard && (
+        <ComboBoardModal
+          cards={selectedDeckInfo}
+          handleClose={setShowComboBoard}
+        />
+      )}
       {showComboModal && (
         <ComboListModal
           leader={params.code}
           handleClose={() => {
             setShowComboModal(false);
           }}
-          combos={[]}
+          combos={combos}
         />
       )}
       <div className={styles.container}>
@@ -88,12 +108,12 @@ const Leader = ({ params }: { params: { code: string } }) => {
         </div>
       </div>
       <div className={styles.container}>
-        {(selectedDeckId && selectedDeckId !== "") && (
+        {selectedDeckId && selectedDeckId !== "" && (
           <>
             <DeckListContainer deckId={selectedDeckId} />
           </>
         )}
-        {(selectedDeckInfo && selectedDeckId !== "") && (
+        {selectedDeckInfo && selectedDeckId !== "" && (
           <>
             <ul>
               {selectedDeckInfo?.map((i) => {

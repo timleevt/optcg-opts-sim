@@ -1,5 +1,5 @@
 const postCombo = async (req: any): Promise<any> => {
-  const url = process.env.NEXT_PUBLIC_API_BASE_URL + "deck/combo";
+  const url = process.env.NEXT_PUBLIC_API_BASE_URL + "v1/deck/combo";
 
   const currBoardStr = req.currBoard.join(",");
   const comboBoardStr = req.comboBoard.join(",");
@@ -14,7 +14,8 @@ const postCombo = async (req: any): Promise<any> => {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        deckId: req.deckId,
+        // deckId: req.deckId,
+        leader: req.leader,
         currBoard: currBoardStr,
         comboBoard: comboBoardStr,
         startCurve: req.startCurve,
