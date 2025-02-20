@@ -6,10 +6,11 @@ import DonBoard from "../DonBoard/DonBoard";
 import ComboBoard from "../ComboBoard/ComboBoard";
 
 type Props = {
+  leader: string;
   cards: CardType[];
   handleClose: (show: boolean) => void;
 };
-const ComboBoardModal = ({ cards, handleClose }: Props) => {
+const ComboBoardModal = ({ leader, cards, handleClose }: Props) => {
   const [numDon, setNumDon] = useState(1);
 
   // Board specific
@@ -92,7 +93,7 @@ const ComboBoardModal = ({ cards, handleClose }: Props) => {
             <div>
               <DonBoard numDon={numDon} handleDonChange={handleDonChange} />
               <ComboBoard
-                leader={"OP01-060"}
+                leader={leader}
                 deckId={48}
                 numDon={numDon}
                 currBoard={currBoard}

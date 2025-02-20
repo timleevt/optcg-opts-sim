@@ -3,7 +3,6 @@
 import { useState } from "react";
 import DeckLoader from "../../../components/DeckLoader/DeckLoader";
 import { CardType } from "../../../interface/Card";
-import DeckListContainer from "../../../components/DeckListContainer/DeckListContainer";
 
 const Build = () => {
   const [deck, setDeck] = useState<CardType[] | null>(null);
@@ -16,6 +15,7 @@ const Build = () => {
   }
   return (
     <div>
+      <p>lmao i dont remember if this page works</p>
       <DeckLoader setDeck={setDeck} />
     </div>
   );

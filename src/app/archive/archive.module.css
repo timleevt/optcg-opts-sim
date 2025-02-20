@@ -1,0 +1,8 @@
+.container {
+  margin: 0px auto;
+  width: 80%;
+}
+.archiveLinks {
+  display: flex;
+  flex-direction: column;
+}

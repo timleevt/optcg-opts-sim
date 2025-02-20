@@ -10,7 +10,7 @@ interface Combo {
 
 const getCombosByLeader = async (leaderCode: string): Promise<Combo[]> => {
   const url = `${process.env.NEXT_PUBLIC_API_BASE_URL}v1/deck/combos/${leaderCode}`;
-
+  console.log(url);
   try {
     const res = await fetch(url, { method: "GET" });
 

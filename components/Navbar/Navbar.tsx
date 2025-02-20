@@ -44,12 +44,12 @@ const Navbar = () => {
       <Link className={styles.link} href="#" style={{ cursor: "not-allowed" }}>
         My Decks
       </Link> */}
-      {/* <Link className={styles.link} href="/decks">
-        Decks
+      <Link className={styles.link} href="/archive">
+        Archive
       </Link>
       <Link className={styles.link} href="/build">
         Build
-      </Link> */}
+      </Link>
       {user && (
         <>
         {/* <Link className={styles.link} href="/profile">

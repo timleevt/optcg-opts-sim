@@ -8,7 +8,7 @@ export type ComboType = {
   notes: string;
 };
 
-export interface Combo {
+export type Combo = {
   id: string;
   leader: string;
   currBoard: string;

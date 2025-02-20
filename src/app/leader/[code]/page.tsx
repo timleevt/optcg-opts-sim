@@ -49,7 +49,6 @@ const Leader = ({ params }: { params: { code: string } }) => {
     fetchDeck();
   }, [selectedDeckId]);
 
-  // TODO GET Combos
   useEffect(() => {
     const fetchCombos = async () => {
       try {
@@ -66,6 +65,7 @@ const Leader = ({ params }: { params: { code: string } }) => {
     <div>
       {showComboBoard && (
         <ComboBoardModal
+          leader={params.code}
           cards={selectedDeckInfo}
           handleClose={setShowComboBoard}
         />
