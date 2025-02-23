@@ -85,6 +85,9 @@ const Action = ({ leaderCode, action }: Props) => {
         </div>
       );
     }
+    case "!activatemain": {
+      return <span className={styles.textAction}>Activate Main</span>;
+    }
     case "!cheat": {
       return <span className={styles.textAction}>Cheat Out</span>;
     }

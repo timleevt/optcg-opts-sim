@@ -96,6 +96,9 @@ const ComboBoard = ({
         <button onClick={() => handleActionClick("!leader")}>
           Leader Ability
         </button>
+        <button onClick={() => handleActionClick("!activatemain")}>
+          Activate Main
+        </button>
         <button onClick={() => handleActionClick("!attach")}>
           Attach DON!!
         </button>

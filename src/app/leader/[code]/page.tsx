@@ -98,12 +98,14 @@ const Leader = ({ params }: { params: { code: string } }) => {
             {deck?.map((i) => {
               return (
                 <option key={i.id} value={i.id}>
-                  {i.name}
+                  {i.author} - {i.name}
                 </option>
               );
             })}
           </select>
-          <button onClick={() => setShowComboBoard(true)}>Combo Board</button>
+          {selectedDeckId && (
+            <button onClick={() => setShowComboBoard(true)}>Combo Board</button>
+          )}
           <button onClick={() => setShowComboModal(true)}>Options</button>
         </div>
       </div>

@@ -39,7 +39,7 @@ const Archive = () => {
                   <Link
                     key={data.id}
                     href={`/archive/${data.id}`}
-                  >{`${data.name}`}</Link>
+                  >{`${data.author} - ${data.name} - ${data.leaderCode.colors.join("/")} ${data.leaderCode.name}`}</Link>
                 );
               })}
           </div>
