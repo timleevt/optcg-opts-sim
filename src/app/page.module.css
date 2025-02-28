@@ -1,6 +1,18 @@
-@media (max-width: 705px) {
-  .banner {
-    height: 20%;
-    width: 80%;
-  }
+.banner {
+  background-image: url("/images/set.png");
+  height: 125px;
+  width: 50%;
+  margin: 0px auto;
+  background-size: cover;
+  background-position-y: 60%;
+}
+
+.banner > span {
+  position: relative;
+  top: 10%;
+  left: 15%;
+  border-radius: 6px;
+  color: white;
+  /* background-color: #848884; */
+  padding: 5px;
 }

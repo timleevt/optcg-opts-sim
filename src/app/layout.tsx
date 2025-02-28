@@ -24,6 +24,15 @@ export default function RootLayout({
           <Navbar />
           {children}
         </UserContextProvider>
+        <footer>
+          <p>
+            This website is not produced, endorsed, supported, or affiliated
+            with Bandai, Bird Studio/Shueisha, Toei Animation or Eiichiro Oda.{" "}
+            <br />
+            All One Piece related graphical information (including card text) is
+            owned by them.
+          </p>
+        </footer>
       </body>
     </html>
   );

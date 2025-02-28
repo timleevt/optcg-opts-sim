@@ -4,7 +4,7 @@ a {
 }
 
 a:hover {
-  color: blue;
+  color: #818589;
 }
 
 button {
@@ -20,4 +20,11 @@ button:hover {
   background-color: cadetblue;
   color: white;
   border: 1px solid cadetblue;
+}
+
+footer {
+  font: 8px;
+  color: #b2beb5;
+  margin-top: 45px;
+  text-align: center;
 }

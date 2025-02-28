@@ -20,6 +20,7 @@ const Leader = ({ params }: { params: { code: string } }) => {
   const [showComboBoard, setShowComboBoard] = useState(false); // temporarily set to true
   const [showComboModal, setShowComboModal] = useState(false);
   const [combos, setCombos] = useState<Combo[]>([]);
+  const [content, setContent] = useState("text");
 
   useEffect(() => {
     const fetchDecks = async () => {
@@ -111,23 +112,29 @@ const Leader = ({ params }: { params: { code: string } }) => {
       </div>
       <div className={styles.container}>
         {selectedDeckId && selectedDeckId !== "" && (
-          <>
-            <DeckListContainer deckId={selectedDeckId} />
-          </>
+          <DeckListContainer deckId={selectedDeckId} />
         )}
         {selectedDeckInfo && selectedDeckId !== "" && (
-          <>
-            <ul>
-              {selectedDeckInfo?.map((i) => {
-                return (
-                  <li key={i.code}>
-                    {i.code + " " + i.name + " x" + i.copies}
-                  </li>
-                );
-              })}
-            </ul>
-            <DeckData deckList={selectedDeckInfo} />
-          </>
+          <div>
+            <div className={styles.btnContainer}>
+              <button onClick={() => setContent("text")}>Text</button>
+              <button onClick={() => setContent("data")}>Data</button>
+            </div>
+            {content === "text" && (
+              <ul className={styles.cardTextItem}>
+                {selectedDeckInfo?.map((i) => {
+                  return (
+                    <li key={i.code}>
+                      <span style={{'fontWeight': '600'}}>{i.code}</span>
+                      {" " + i.name + " x" + i.copies}
+                    </li>
+                  );
+                })}
+              </ul>
+            )}
+
+            {content === "data" && <DeckData deckList={selectedDeckInfo} />}
+          </div>
         )}
       </div>
     </div>

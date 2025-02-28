@@ -1,3 +1,18 @@
+.searchContainer {
+  display: flex;
+  flex-direction: column;
+}
+.searchBar {
+  display: block;
+  margin: 20px auto;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  height: 46px;
+  padding: 2px 10px 2px 10px;
+  font-size: 26px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
 .deckTable {
   width: 100%;
   text-align: left;
@@ -28,4 +43,37 @@
   height: 55px;
   margin: auto;
   margin-top: -16px;
+}
+
+.testc {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin: 0px auto;
+  width: 50%;
+  gap: 12px;
+}
+
+.leaderCardContainer {
+  display: flex;
+  border-radius: 15px;
+  height: 100px;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  position: relative;
+  top: 0;
+  transition: top ease 0.5s;
+}
+
+.leaderCardContainer:hover {
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  color: black;
+  top: -10px;
+}
+
+.cardDetail {
+  margin: auto 0px;
+  margin-left: 35%;
+}
+
+.codeText {
+  font-size: 10px;
 }
