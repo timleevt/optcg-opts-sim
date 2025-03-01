@@ -45,13 +45,27 @@
   margin-top: -16px;
 }
 
-.testc {
+.leaderContainer {
   display: grid;
   grid-template-columns: 1fr 1fr;
   margin: 0px auto;
   width: 50%;
   gap: 12px;
 }
+
+@media (max-width: 948px) {
+  .leaderContainer {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+}
+
+@media (max-width: 550px) {
+  .leaderContainer {
+    width: 80%;
+  }
+}
+
 
 .leaderCardContainer {
   display: flex;
@@ -75,5 +89,5 @@
 }
 
 .codeText {
-  font-size: 10px;
+  font-size: 12px;
 }
